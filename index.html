@@ -6,152 +6,154 @@
 <title>CHEMES | Ranking de Productos</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<!-- Import Hammer.js for touch gestures required by the zoom/pan plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-<!-- Import Chart.js zoom/pan plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.2.0/chartjs-plugin-zoom.min.js"></script>
 <style>
+/* ===== PALETA CORPORATIVA CHEMES - CLARA ===== */
 :root {
-  --bg-primary: #0a0e17;
-  --bg-secondary: #111827;
-  --bg-card: #1a2236;
-  --bg-card-hover: #1f2a42;
-  --border: #2a3654;
-  --text-primary: #e8ecf4;
-  --text-secondary: #8892a8;
-  --text-muted: #5a6478;
-  --accent-blue: #3b82f6;
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-red: #ef4444;
-  --accent-purple: #8b5cf6;
-  --accent-pink: #ec4899;
-  --gradient-blue: linear-gradient(135deg, #3b82f6, #06b6d4);
-  --gradient-emerald: linear-gradient(135deg, #10b981, #06b6d4);
-  --gradient-amber: linear-gradient(135deg, #f59e0b, #ef4444);
-  --gradient-purple: linear-gradient(135deg, #8b5cf6, #ec4899);
+  --bg-primary:    #f0f4f7;
+  --bg-secondary:  #e4ecf1;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f5f9fb;
+  --border:        #ccdde6;
+  --text-primary:  #1a2e3b;
+  --text-secondary:#4a6375;
+  --text-muted:    #7a96a6;
+
+  /* Acento principal CHEMES */
+  --accent-blue:    #2596be;
+  --accent-cyan:    #7ecfe0;
+  --accent-emerald: #1a7a4e;
+  --accent-amber:   #c47d0e;
+  --accent-red:     #c0392b;
+  --accent-purple:  #6b3ca8;
+  --accent-pink:    #a0357a;
+
+  --gradient-blue:    linear-gradient(135deg, #2596be, #7ecfe0);
+  --gradient-emerald: linear-gradient(135deg, #1a7a4e, #27ae60);
+  --gradient-amber:   linear-gradient(135deg, #c47d0e, #e6a817);
+  --gradient-purple:  linear-gradient(135deg, #6b3ca8, #9b59b6);
+
   --radius: 12px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow: 0 1px 4px rgba(37,150,190,0.08);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { background: #f0f4f7 !important; }
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: #f0f4f7 !important;
+  color: #1a2e3b !important;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Subtle animated background */
-body::before {
-  content: '';
-  position: fixed;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.04) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.03) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 80%, rgba(139,92,246,0.03) 0%, transparent 50%);
-  animation: bgDrift 30s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
-}
-@keyframes bgDrift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(-3%, -3%) rotate(2deg); }
-}
+/* sin fondo animado en tema claro */
+body::before { display: none; }
 
 /* ===== HEADER ===== */
 .header {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(10,14,23,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  background: #2596be;
+  border-bottom: 2px solid #1a7a9e;
   padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(37,150,190,0.20);
 }
 .header-inner {
   max-width: 1600px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
+  height: 56px;
 }
 .logo {
   display: flex; align-items: center; gap: 12px;
-  font-weight: 700; font-size: 18px; letter-spacing: 0.5px;
+  font-weight: 700; font-size: 17px; letter-spacing: 0.3px;
 }
 .logo-mark {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: var(--gradient-blue);
+  width: 34px; height: 34px; border-radius: 9px;
+  background: #ffffff;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 14px; color: white;
-  box-shadow: 0 0 20px rgba(59,130,246,0.3);
+  font-weight: 700; font-size: 13px; color: #2596be;
 }
+.logo > span { color: #ffffff; }
+.logo > span span { color: rgba(255,255,255,0.72); font-weight: 400; }
+
 .header-meta {
-  display: flex; align-items: center; gap: 16px;
-  font-size: 13px; color: var(--text-secondary);
+  display: flex; align-items: center; gap: 14px;
+  font-size: 12px; color: rgba(255,255,255,0.85);
 }
-.header-meta .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-emerald); animation: pulse 2s infinite; }
+.header-meta .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #7ecfe0;
+  animation: pulse 2s infinite;
+}
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
 .btn-reload {
-  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
-  padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 13px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #ffffff;
+  padding: 5px 14px; border-radius: 7px;
+  cursor: pointer; font-size: 12px; font-weight: 600;
   font-family: inherit; transition: all 0.2s;
 }
-.btn-reload:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.btn-reload:hover { background: rgba(255,255,255,0.28); }
 
 /* ===== MAIN LAYOUT ===== */
 .main {
   position: relative; z-index: 1;
   max-width: 1600px; margin: 0 auto;
-  padding: 24px;
+  padding: 20px 24px;
 }
 
 /* ===== FILTERS BAR ===== */
 .filters-bar {
   display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
-  margin-bottom: 24px;
-  padding: 16px 20px;
+  margin-bottom: 20px;
+  padding: 14px 18px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 .filter-group { display: flex; flex-direction: column; gap: 4px; }
 .filter-group label {
-  font-size: 10px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--text-muted);
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.9px; color: var(--text-muted);
 }
 .filter-group select, .filter-group input {
-  background: var(--bg-secondary); border: 1px solid var(--border);
-  color: var(--text-primary); padding: 8px 12px; border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 7px 11px; border-radius: 7px;
   font-family: inherit; font-size: 13px; min-width: 160px;
   transition: border-color 0.2s;
 }
 .filter-group select:focus, .filter-group input:focus {
-  outline: none; border-color: var(--accent-blue);
+  outline: none;
+  border-color: #2596be;
+  box-shadow: 0 0 0 2px rgba(37,150,190,0.12);
 }
-.filter-search {
-  flex: 1; min-width: 200px;
-}
+.filter-search { flex: 1; min-width: 200px; }
 .filter-search input { width: 100%; min-width: 200px; }
 
 /* ===== KPI CARDS ===== */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
 }
 .kpi-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
+  padding: 18px 18px 16px;
+  position: relative; overflow: hidden;
   transition: transform 0.2s, border-color 0.2s;
+  box-shadow: var(--shadow);
 }
-.kpi-card:hover { transform: translateY(-2px); border-color: rgba(59,130,246,0.3); }
+.kpi-card:hover { transform: translateY(-1px); border-color: #7ecfe0; }
 .kpi-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
 }
@@ -161,58 +163,64 @@ body::before {
 .kpi-card:nth-child(4)::before { background: var(--gradient-purple); }
 .kpi-card:nth-child(5)::before { background: linear-gradient(135deg, var(--accent-red), var(--accent-amber)); }
 .kpi-card:nth-child(6)::before { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald)); }
-.kpi-card:nth-child(7)::before { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); }
-.kpi-card:nth-child(8)::before { background: linear-gradient(135deg, var(--accent-emerald), var(--accent-purple)); }
+.kpi-card:nth-child(7)::before { background: var(--gradient-blue); }
+.kpi-card:nth-child(8)::before { background: var(--gradient-emerald); }
+
 .kpi-label {
-  font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 8px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.9px; color: var(--text-muted); margin-bottom: 7px;
 }
 .kpi-value {
   font-family: 'Space Mono', monospace;
-  font-size: 28px; font-weight: 700; line-height: 1;
-  margin-bottom: 8px;
+  font-size: 26px; font-weight: 700; line-height: 1;
+  margin-bottom: 6px; color: #2596be;
 }
-.kpi-sub { font-size: 12px; color: var(--text-secondary); }
+.kpi-sub { font-size: 11px; color: var(--text-secondary); }
 .kpi-icon {
-  position: absolute; top: 16px; right: 16px;
-  font-size: 20px; opacity: 0.4;
+  position: absolute; top: 14px; right: 14px;
+  font-size: 18px; opacity: 0.30;
 }
 
 /* ===== CHART SECTIONS ===== */
 .grid-2 {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  margin-bottom: 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  margin-bottom: 20px;
 }
 .grid-3 {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
-  margin-bottom: 24px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+  margin-bottom: 20px;
 }
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 18px;
   box-shadow: var(--shadow);
 }
 .card-header {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .card-title {
-  font-size: 14px; font-weight: 600;
+  font-size: 13px; font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase; letter-spacing: 0.4px;
   display: flex; align-items: center; gap: 8px;
 }
 .card-title .dot-indicator {
-  width: 8px; height: 8px; border-radius: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
 }
-.card-actions { display: flex; gap: 4px; }
+.card-actions { display: flex; gap: 3px; }
 .card-actions button {
-  background: var(--bg-secondary); border: 1px solid var(--border);
-  color: var(--text-secondary); padding: 4px 10px; border-radius: 6px;
-  font-family: inherit; font-size: 11px; cursor: pointer; transition: all 0.2s;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 4px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 11px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
 }
 .card-actions button.active, .card-actions button:hover {
-  background: var(--accent-blue); color: white; border-color: var(--accent-blue);
+  background: #2596be; color: #fff; border-color: #2596be;
 }
 
 .chart-container { position: relative; width: 100%; }
@@ -220,12 +228,12 @@ body::before {
 
 /* ===== HEALTH INDICATORS ===== */
 .health-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  margin-bottom: 16px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: 14px;
 }
 .health-item {
   background: var(--bg-secondary);
-  border-radius: 8px; padding: 14px;
+  border-radius: 8px; padding: 13px;
   text-align: center;
   border: 1px solid transparent;
   transition: border-color 0.2s;
@@ -233,83 +241,83 @@ body::before {
 .health-item:hover { border-color: var(--border); }
 .health-item .h-value {
   font-family: 'Space Mono', monospace;
-  font-size: 22px; font-weight: 700;
+  font-size: 20px; font-weight: 700;
 }
 .health-item .h-label {
-  font-size: 11px; color: var(--text-secondary); margin-top: 4px;
+  font-size: 11px; color: var(--text-secondary); margin-top: 3px;
 }
-.health-ok .h-value { color: var(--accent-emerald); }
-.health-warn .h-value { color: var(--accent-amber); }
-.health-danger .h-value { color: var(--accent-red); }
-.health-info .h-value { color: var(--accent-blue); }
+.health-ok    .h-value { color: #1a7a4e; }
+.health-warn  .h-value { color: #c47d0e; }
+.health-danger .h-value { color: #c0392b; }
+.health-info  .h-value { color: #2596be; }
 
 /* ===== DATA TABLE ===== */
-.table-wrap {
-  overflow-x: auto;
-  margin-top: 12px;
-}
-table {
-  width: 100%; border-collapse: collapse;
-  font-size: 13px;
-}
+.table-wrap { overflow-x: auto; margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead th {
-  text-align: left; padding: 10px 12px;
-  font-size: 10px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--text-muted);
+  text-align: left; padding: 9px 11px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.7px; color: var(--text-muted);
   border-bottom: 1px solid var(--border);
   cursor: pointer; white-space: nowrap;
   user-select: none; transition: color 0.2s;
-  position: relative;
+  background: var(--bg-secondary);
 }
 thead th:hover { color: var(--text-primary); }
-thead th.sorted { color: var(--accent-blue); }
-thead th .sort-arrow { font-size: 10px; margin-left: 4px; }
+thead th.sorted { color: #2596be; }
+thead th .sort-arrow { font-size: 9px; margin-left: 3px; }
+
 tbody tr {
-  border-bottom: 1px solid rgba(42,54,84,0.4);
-  transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
 }
 tbody tr:hover { background: var(--bg-card-hover); }
+tbody tr:last-child { border-bottom: none; }
+
 td {
-  padding: 10px 12px; white-space: nowrap;
+  padding: 9px 11px; white-space: nowrap;
   max-width: 250px; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text-primary);
 }
 td.num {
   font-family: 'Space Mono', monospace; font-size: 12px;
   text-align: right;
 }
+
 .badge {
   display: inline-block; padding: 2px 8px; border-radius: 4px;
-  font-size: 11px; font-weight: 600;
+  font-size: 11px; font-weight: 700;
 }
-.badge-ok { background: rgba(16,185,129,0.15); color: var(--accent-emerald); }
-.badge-warn { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
-.badge-danger { background: rgba(239,68,68,0.15); color: var(--accent-red); }
-.badge-info { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
-.badge-muted { background: rgba(90,100,120,0.15); color: var(--text-muted); }
+.badge-ok     { background: rgba(26,122,78,0.10);  color: #1a7a4e; }
+.badge-warn   { background: rgba(196,125,14,0.12); color: #c47d0e; }
+.badge-danger { background: rgba(192,57,43,0.10);  color: #c0392b; }
+.badge-info   { background: rgba(37,150,190,0.12); color: #2596be; }
+.badge-muted  { background: rgba(122,150,166,0.12);color: #7a96a6; }
 
-.bar-cell {
-  display: flex; align-items: center; gap: 8px;
-}
+.bar-cell { display: flex; align-items: center; gap: 8px; }
 .bar-mini {
-  height: 6px; border-radius: 3px; min-width: 4px;
+  height: 5px; border-radius: 3px; min-width: 4px;
   transition: width 0.5s ease;
 }
 
 /* ===== TAB NAV ===== */
 .tab-nav {
-  display: flex; gap: 2px; margin-bottom: 20px;
-  background: var(--bg-secondary); border-radius: 10px; padding: 4px;
+  display: flex; gap: 2px; margin-bottom: 18px;
+  background: var(--bg-secondary);
+  border-radius: 9px; padding: 3px;
   width: fit-content;
+  border: 1px solid var(--border);
 }
 .tab-nav button {
-  background: transparent; border: none; color: var(--text-secondary);
-  padding: 8px 18px; border-radius: 8px;
+  background: transparent; border: none;
+  color: var(--text-secondary);
+  padding: 7px 16px; border-radius: 7px;
   font-family: inherit; font-size: 13px; font-weight: 500;
   cursor: pointer; transition: all 0.2s;
 }
 .tab-nav button.active {
-  background: var(--accent-blue); color: white;
-  box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+  background: #2596be; color: #fff;
+  box-shadow: 0 2px 6px rgba(37,150,190,0.25);
 }
 .tab-nav button:hover:not(.active) { color: var(--text-primary); }
 
@@ -319,16 +327,19 @@ td.num {
 /* ===== PAGINATION ===== */
 .pagination {
   display: flex; align-items: center; justify-content: space-between;
-  margin-top: 16px; font-size: 13px; color: var(--text-secondary);
+  margin-top: 14px; font-size: 12px; color: var(--text-secondary);
 }
-.pagination .page-btns { display: flex; gap: 4px; }
+.pagination .page-btns { display: flex; gap: 3px; }
 .pagination button {
-  background: var(--bg-secondary); border: 1px solid var(--border);
-  color: var(--text-secondary); padding: 6px 12px; border-radius: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 11px; border-radius: 6px;
   font-family: inherit; font-size: 12px; cursor: pointer;
+  transition: all 0.15s;
 }
-.pagination button:hover { background: var(--bg-card-hover); }
-.pagination button.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+.pagination button:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.pagination button.active { background: #2596be; color: #fff; border-color: #2596be; }
 
 /* ===== LOADING / EMPTY ===== */
 .loading-overlay {
@@ -336,14 +347,17 @@ td.num {
   min-height: 200px; color: var(--text-muted);
 }
 .spinner {
-  width: 32px; height: 32px; border: 3px solid var(--border);
-  border-top-color: var(--accent-blue); border-radius: 50%;
-  animation: spin 0.8s linear infinite; margin-right: 12px;
+  width: 32px; height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: #2596be;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ===== SCROLLBAR ===== */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
@@ -353,131 +367,79 @@ td.num {
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .main { padding: 12px; }
-  
-  /* Header */
+  .main { padding: 10px 12px; }
   .header { padding: 0 12px; }
-  .header-inner { 
-    flex-wrap: wrap; height: auto; padding: 10px 0; gap: 6px;
-  }
-  .logo { font-size: 15px; gap: 8px; }
-  .logo-mark { width: 30px; height: 30px; font-size: 12px; }
-  .logo span span { display: none; } /* hide subtitle */
-  .header-meta { font-size: 12px; gap: 8px; }
-  
-  /* Filters */
-  .filters-bar { 
-    flex-direction: column; gap: 10px;
-    padding: 12px; margin-bottom: 16px;
-  }
+  .header-inner { flex-wrap: wrap; height: auto; padding: 8px 0; gap: 6px; }
+  .logo { font-size: 14px; gap: 8px; }
+  .logo-mark { width: 28px; height: 28px; font-size: 11px; }
+  .logo span span { display: none; }
+  .header-meta { font-size: 11px; gap: 8px; }
+  .filters-bar { flex-direction: column; gap: 8px; padding: 12px; margin-bottom: 14px; }
   .filter-group { width: 100%; }
-  .filter-group select, .filter-group input { 
-    min-width: unset; width: 100%; font-size: 14px; padding: 10px 12px;
-  }
+  .filter-group select, .filter-group input { min-width: unset; width: 100%; font-size: 14px; padding: 9px 11px; }
   .filter-search { min-width: unset; }
-  .filter-search input { min-width: unset; }
-  
-  /* KPIs - 2 columns, more compact */
-  .kpi-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 8px; margin-bottom: 16px;
-  }
-  .kpi-card { padding: 14px 12px; }
-  .kpi-value { font-size: 22px; }
-  .kpi-label { font-size: 10px; letter-spacing: 0.8px; }
-  .kpi-sub { font-size: 11px; }
-  .kpi-icon { font-size: 16px; top: 10px; right: 10px; }
-  
-  /* Health */
-  .health-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .health-item { padding: 10px; }
-  .health-item .h-value { font-size: 18px; }
-  
-  /* Charts */
-  .card { padding: 14px; margin-bottom: 0; }
-  .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .card-title { font-size: 13px; }
-  .card-actions { width: 100%; }
-  .card-actions button { flex: 1; text-align: center; padding: 6px 8px; }
-  .chart-container { height: 280px !important; }
-  .grid-2, .grid-3 { gap: 12px; margin-bottom: 16px; }
-  
-  /* Tabs */
-  .tab-nav { 
-    width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    padding: 3px; gap: 1px;
-  }
-  .tab-nav button { 
-    padding: 8px 12px; font-size: 12px; white-space: nowrap; flex-shrink: 0;
-  }
-  
-  /* Tables - key fix for mobile */
-  .table-wrap { 
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-    margin: 0 -14px; padding: 0 14px;
-  }
-  table { font-size: 12px; min-width: 600px; }
-  thead th { padding: 8px 8px; font-size: 9px; letter-spacing: 0.5px; }
-  td { padding: 8px 8px; font-size: 12px; max-width: 150px; }
-  td.num { font-size: 11px; }
-  
-  /* Pagination */
-  .pagination { 
-    flex-direction: column; gap: 8px; align-items: center;
-    font-size: 12px; 
-  }
-  .pagination button { padding: 8px 14px; }
-  
-  /* Doughnut chart legend on bottom for mobile */
-}
-
-@media (max-width: 480px) {
-  .main { padding: 8px; }
-  
-  .kpi-grid { gap: 6px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 14px; }
   .kpi-card { padding: 12px 10px; }
   .kpi-value { font-size: 20px; }
   .kpi-label { font-size: 9px; }
   .kpi-sub { font-size: 10px; }
+  .kpi-icon { font-size: 15px; top: 10px; right: 10px; }
+  .health-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .health-item { padding: 10px; }
+  .health-item .h-value { font-size: 17px; }
+  .card { padding: 12px; margin-bottom: 0; }
+  .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .card-title { font-size: 12px; }
+  .card-actions { width: 100%; }
+  .card-actions button { flex: 1; text-align: center; padding: 6px 8px; }
+  .chart-container { height: 280px !important; }
+  .grid-2, .grid-3 { gap: 10px; margin-bottom: 14px; }
+  .tab-nav { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 3px; gap: 1px; }
+  .tab-nav button { padding: 7px 11px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -12px; padding: 0 12px; }
+  table { font-size: 12px; min-width: 600px; }
+  thead th { padding: 7px 8px; font-size: 9px; letter-spacing: 0.4px; }
+  td { padding: 7px 8px; font-size: 12px; max-width: 150px; }
+  td.num { font-size: 11px; }
+  .pagination { flex-direction: column; gap: 8px; align-items: center; font-size: 12px; }
+  .pagination button { padding: 7px 13px; }
+}
+@media (max-width: 480px) {
+  .main { padding: 8px; }
+  .kpi-grid { gap: 6px; }
+  .kpi-card { padding: 10px 9px; }
+  .kpi-value { font-size: 18px; }
+  .kpi-label { font-size: 9px; }
+  .kpi-sub { font-size: 10px; }
   .kpi-icon { display: none; }
-  
-  .health-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .health-item .h-value { font-size: 16px; }
+  .health-grid { gap: 6px; }
+  .health-item .h-value { font-size: 15px; }
   .health-item .h-label { font-size: 10px; }
-  
   .card { padding: 10px; }
   .chart-container { height: 240px !important; }
-  
   .filters-bar { padding: 10px; }
-  
   .header-meta #headerDate { display: none; }
-  
-  .tab-nav button { padding: 6px 10px; font-size: 11px; }
-  
+  .tab-nav button { padding: 6px 9px; font-size: 11px; }
   table { min-width: 500px; }
   thead th { padding: 6px; }
   td { padding: 6px; max-width: 120px; }
 }
 
-/* Entry animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.animate-in {
-  animation: fadeUp 0.5s ease forwards;
-  opacity: 0;
-}
+.animate-in { animation: fadeUp 0.5s ease forwards; opacity: 0; }
 </style>
 </head>
-<body>
+<body style="background:#f0f4f7;color:#1a2e3b;">
 
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <div class="logo">
       <div class="logo-mark">CH</div>
-      <span>CHEMES <span style="color:var(--text-muted); font-weight:400">Ranking de Productos</span></span>
+      <span>CHEMES <span>· Ranking de Productos</span></span>
     </div>
     <div class="header-meta">
       <div class="dot"></div>
@@ -516,7 +478,7 @@ td.num {
     </div>
     <div class="filter-group filter-search">
       <label>Buscar artículo / SKU</label>
-      <input type="text" id="filterSearch" placeholder="Buscar por código, nombre o proveedor..." aria-label="Buscar por código, nombre o proveedor">
+      <input type="text" id="filterSearch" placeholder="Buscar por código, nombre o proveedor..." aria-label="Buscar">
     </div>
   </div>
 
@@ -558,8 +520,6 @@ td.num {
       <div class="kpi-value" id="kpiCobertura">--</div>
       <div class="kpi-sub">meses de stock</div>
     </div>
-
-    <!-- NUEVOS KPIs PARA DEPOSITOS CD Y CA -->
     <div class="kpi-card">
       <div class="kpi-icon">🏢</div>
       <div class="kpi-label">Stock CD (uds)</div>
@@ -575,10 +535,10 @@ td.num {
   </div>
 
   <!-- HEALTH OF INVENTORY -->
-  <div class="card animate-in" style="animation-delay:0.15s; margin-bottom:24px">
+  <div class="card animate-in" style="animation-delay:0.15s; margin-bottom:20px">
     <div class="card-header">
       <div class="card-title">
-        <div class="dot-indicator" style="background:var(--accent-cyan)"></div>
+        <div class="dot-indicator" style="background:#2596be"></div>
         Salud del Inventario
       </div>
     </div>
@@ -600,8 +560,8 @@ td.num {
         <div class="h-label">Sin Movimiento</div>
       </div>
     </div>
-    <div class="chart-container" style="height:24px; margin-top:8px">
-      <div id="healthBar" style="display:flex; height:100%; border-radius:12px; overflow:hidden;"></div>
+    <div class="chart-container" style="height:22px; margin-top:8px">
+      <div id="healthBar" style="display:flex; height:100%; border-radius:11px; overflow:hidden;"></div>
     </div>
   </div>
 
@@ -610,7 +570,7 @@ td.num {
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-          <div class="dot-indicator" style="background:var(--accent-blue)"></div>
+          <div class="dot-indicator" style="background:#2596be"></div>
           Ventas por Rubro
         </div>
         <div class="card-actions">
@@ -626,7 +586,7 @@ td.num {
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-          <div class="dot-indicator" style="background:var(--accent-purple)"></div>
+          <div class="dot-indicator" style="background:#6b3ca8"></div>
           Distribución de Stock por Rubro
         </div>
       </div>
@@ -640,7 +600,7 @@ td.num {
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-          <div class="dot-indicator" style="background:var(--accent-emerald)"></div>
+          <div class="dot-indicator" style="background:#1a7a4e"></div>
           Top 15 Proveedores
         </div>
         <div class="card-actions">
@@ -655,7 +615,7 @@ td.num {
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-          <div class="dot-indicator" style="background:var(--accent-amber)"></div>
+          <div class="dot-indicator" style="background:#c47d0e"></div>
           Cobertura de Stock por Rubro (meses)
         </div>
       </div>
@@ -686,23 +646,21 @@ td.num {
       </div>
       <div class="table-wrap">
         <table id="tableRanking">
-          <thead>
-            <tr>
-              <th style="width:40px">#</th>
-              <th data-sort="COD_ARTICULO">Código</th>
-              <th data-sort="ARTICULO">Artículo</th>
-              <th data-sort="RUBRO">Rubro</th>
-              <th data-sort="NOM_PROVEE">Proveedor</th>
-              <th data-sort="STOCK" style="text-align:right">Stock</th>
-              <th data-sort="STOCK_CD" style="text-align:right">Stock CD</th>
-              <th data-sort="STOCK_CA" style="text-align:right">Stock CA</th>
-              <th data-sort="VentasUltimoMes" style="text-align:right">Vta Mes</th>
-              <th data-sort="VentasUltimos3Meses" style="text-align:right">Vta 3M</th>
-              <th data-sort="VentasUltimoAnio" style="text-align:right">Vta Año</th>
-              <th style="width:140px">Cobertura</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th style="width:40px">#</th>
+            <th data-sort="COD_ARTICULO">Código</th>
+            <th data-sort="ARTICULO">Artículo</th>
+            <th data-sort="RUBRO">Rubro</th>
+            <th data-sort="NOM_PROVEE">Proveedor</th>
+            <th data-sort="STOCK" style="text-align:right">Stock</th>
+            <th data-sort="STOCK_CD" style="text-align:right">Stock CD</th>
+            <th data-sort="STOCK_CA" style="text-align:right">Stock CA</th>
+            <th data-sort="VentasUltimoMes" style="text-align:right">Vta Mes</th>
+            <th data-sort="VentasUltimos3Meses" style="text-align:right">Vta 3M</th>
+            <th data-sort="VentasUltimoAnio" style="text-align:right">Vta Año</th>
+            <th style="width:140px">Cobertura</th>
+            <th>Estado</th>
+          </tr></thead>
           <tbody id="bodyRanking"></tbody>
         </table>
       </div>
@@ -714,22 +672,16 @@ td.num {
 
     <!-- QUIEBRES TABLE -->
     <div class="tab-content" id="tab-quiebres">
-      <div class="card-title" style="margin-bottom:12px">Artículos sin stock con venta en el último mes</div>
+      <div class="card-title" style="margin-bottom:12px;font-size:12px;color:var(--text-muted)">Artículos sin stock con venta en el último mes</div>
       <div class="table-wrap">
         <table id="tableQuiebres">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Código</th>
-              <th>Artículo</th>
-              <th>Rubro</th>
-              <th>Proveedor</th>
-              <th style="text-align:right">Vta Mes</th>
-              <th style="text-align:right">Vta 3M</th>
-              <th style="text-align:right">Vta Año</th>
-              <th style="text-align:right">A Recep.</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>#</th><th>Código</th><th>Artículo</th><th>Rubro</th><th>Proveedor</th>
+            <th style="text-align:right">Vta Mes</th>
+            <th style="text-align:right">Vta 3M</th>
+            <th style="text-align:right">Vta Año</th>
+            <th style="text-align:right">A Recep.</th>
+          </tr></thead>
           <tbody id="bodyQuiebres"></tbody>
         </table>
       </div>
@@ -737,21 +689,15 @@ td.num {
 
     <!-- SOBRESTOCK TABLE -->
     <div class="tab-content" id="tab-sobrestock">
-      <div class="card-title" style="margin-bottom:12px">Artículos con stock superior a 6 meses de cobertura</div>
+      <div class="card-title" style="margin-bottom:12px;font-size:12px;color:var(--text-muted)">Artículos con stock superior a 6 meses de cobertura</div>
       <div class="table-wrap">
         <table id="tableSobrestock">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Código</th>
-              <th>Artículo</th>
-              <th>Rubro</th>
-              <th>Proveedor</th>
-              <th style="text-align:right">Stock</th>
-              <th style="text-align:right">Vta 3M</th>
-              <th>Cobertura</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>#</th><th>Código</th><th>Artículo</th><th>Rubro</th><th>Proveedor</th>
+            <th style="text-align:right">Stock</th>
+            <th style="text-align:right">Vta 3M</th>
+            <th>Cobertura</th>
+          </tr></thead>
           <tbody id="bodySobrestock"></tbody>
         </table>
       </div>
@@ -763,20 +709,14 @@ td.num {
 
     <!-- SIN MOVIMIENTO TABLE -->
     <div class="tab-content" id="tab-sinmov">
-      <div class="card-title" style="margin-bottom:12px">Artículos con stock pero sin ventas en los últimos 3 meses</div>
+      <div class="card-title" style="margin-bottom:12px;font-size:12px;color:var(--text-muted)">Artículos con stock pero sin ventas en los últimos 3 meses</div>
       <div class="table-wrap">
         <table id="tableSinmov">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Código</th>
-              <th>Artículo</th>
-              <th>Rubro</th>
-              <th>Proveedor</th>
-              <th style="text-align:right">Stock</th>
-              <th style="text-align:right">Vta Año</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>#</th><th>Código</th><th>Artículo</th><th>Rubro</th><th>Proveedor</th>
+            <th style="text-align:right">Stock</th>
+            <th style="text-align:right">Vta Año</th>
+          </tr></thead>
           <tbody id="bodySinmov"></tbody>
         </table>
       </div>
@@ -789,7 +729,6 @@ td.num {
 
 </div>
 
-
 <script>
 // ===== GLOBALS =====
 let DATA = [];
@@ -798,11 +737,8 @@ let CHARTS = {};
 let rankPeriod = 'mes';
 let currentPages = { ranking: 1, sobrestock: 1, sinmov: 1 };
 const PAGE_SIZE = 25;
-// Sorting configuration for ranking table. Keeps the current field and direction (asc true = ascending, false = descending).
 let sortConfig = { key: null, asc: false };
 
-// Register the Chart.js zoom plugin if available. The plugin enables zooming and panning on charts.
-// It is attached to the global ChartZoom namespace when loaded via the script tag.
 if (typeof Chart !== 'undefined' && window.ChartZoom && typeof Chart.register === 'function') {
   Chart.register(window.ChartZoom);
 }
@@ -820,32 +756,16 @@ function parseCSV(text) {
   });
 }
 function parseLine(line) {
-  // CSV parsing with support for quoted fields and escaped quotes.
   const result = [];
   let current = '';
   let inQuote = false;
   for (let i = 0; i < line.length; i++) {
     const c = line[i];
-    // Handle escaped double quotes ("")
-    if (c === '"' && line[i + 1] === '"') {
-      current += '"';
-      i++; // skip the escaped quote
-      continue;
-    }
-    // Toggle quoting status
-    if (c === '"') {
-      inQuote = !inQuote;
-      continue;
-    }
-    // Separator outside of quotes yields a new field
-    if (c === ';' && !inQuote) {
-      result.push(current);
-      current = '';
-      continue;
-    }
+    if (c === '"' && line[i + 1] === '"') { current += '"'; i++; continue; }
+    if (c === '"') { inQuote = !inQuote; continue; }
+    if (c === ';' && !inQuote) { result.push(current); current = ''; continue; }
     current += c;
   }
-  // Push last field
   result.push(current);
   return result;
 }
@@ -856,8 +776,6 @@ function num(v) {
 }
 function fmt(n) { return n.toLocaleString('es-AR', { maximumFractionDigits: 0 }); }
 
-// ===== LOAD DATA =====
-
 // ===== UI HELPERS =====
 function showLoading(show) {
   let el = document.getElementById('loadingOverlay');
@@ -865,9 +783,8 @@ function showLoading(show) {
     if (!el) {
       el = document.createElement('div');
       el.id = 'loadingOverlay';
-      el.className = 'loading-overlay';
-      el.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:rgba(10,14,23,0.92);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;';
-      el.innerHTML = '<div class="spinner" style="width:48px;height:48px;border-width:4px;margin-bottom:16px"></div><div style="font-size:16px;color:var(--text-secondary)">Cargando datos desde Google Drive...</div><div style="font-size:12px;color:var(--text-muted);margin-top:8px">Esto puede tomar unos segundos</div>';
+      el.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:rgba(240,244,247,0.93);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;';
+      el.innerHTML = '<div class="spinner" style="width:42px;height:42px;border-width:3px;margin-bottom:14px"></div><div style="font-size:15px;color:#4a6375">Cargando datos desde Google Drive...</div><div style="font-size:12px;color:#7a96a6;margin-top:6px">Esto puede tomar unos segundos</div>';
       document.body.appendChild(el);
     }
     el.style.display = 'flex';
@@ -881,72 +798,48 @@ function showError(msg) {
   if (!el) {
     el = document.createElement('div');
     el.id = 'loadingOverlay';
-    el.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:rgba(10,14,23,0.92);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;';
+    el.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:rgba(240,244,247,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;';
     document.body.appendChild(el);
   }
-  el.innerHTML = `<div style="font-size:40px;margin-bottom:16px">⚠️</div><div style="font-size:16px;color:var(--accent-amber);max-width:400px;text-align:center">${msg}</div><button onclick="loadData()" style="margin-top:16px;background:var(--accent-blue);color:white;border:none;padding:10px 24px;border-radius:8px;font-family:inherit;font-size:14px;cursor:pointer">Reintentar</button>`;
+  el.innerHTML = `<div style="font-size:38px;margin-bottom:14px">⚠️</div><div style="font-size:15px;color:#c47d0e;max-width:420px;text-align:center;line-height:1.6">${msg}</div><button onclick="loadData()" style="margin-top:16px;background:#2596be;color:white;border:none;padding:10px 24px;border-radius:8px;font-family:inherit;font-size:14px;cursor:pointer;font-weight:600">Reintentar</button>`;
   el.style.display = 'flex';
 }
 
-
 async function loadData() {
-  // ============================================================
-  // CONFIGURACIÓN DE FUENTE DE DATOS
-  // ============================================================
-  // OPCIÓN 1: Google Apps Script (recomendado - sin problemas CORS)
-  // Reemplazá esta URL con la de tu Web App de Apps Script:
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoMVjODiw-4bhxGwCKjNJwEhVNUzaYQ1xwVMHG7u2fIJTLrIrIJ2f7azVcgrivGgl8/exec';
-  
-  // OPCIÓN 2: Google Sheets publicada como CSV
-  // Si convertís el CSV a Google Sheet, publicala en Web y pegá el ID:
   const SHEET_ID = '';
   const SHEET_URL = SHEET_ID ? `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv` : '';
-  
-  // OPCIÓN 3: CSV directo desde Google Drive (puede tener CORS)
   const DRIVE_FILE_ID = '1-y4j69EbhLNlXkjLvuC2ed5lx5bCTee4';
   const DRIVE_URL = `https://drive.google.com/uc?export=download&id=${DRIVE_FILE_ID}`;
-  
-  // OPCIÓN 4: CSV en GitHub Pages (ideal para hosting propio)
-  // Si alojás el CSV junto al HTML en GitHub Pages:
   const LOCAL_CSV = 'Reporte_Ranking.csv';
-  
+
   showLoading(true);
   let loaded = false;
 
-  // Construir lista de URLs a intentar en orden de prioridad
   const sources = [];
   if (APPS_SCRIPT_URL) sources.push({ url: APPS_SCRIPT_URL, name: 'Apps Script' });
-  if (SHEET_URL) sources.push({ url: SHEET_URL, name: 'Google Sheet' });
-  if (DRIVE_URL) sources.push({ url: DRIVE_URL, name: 'Google Drive' });
-  sources.push({ url: LOCAL_CSV, name: 'CSV Local' });
-  sources.push({ url: 'Reporte_Ranking_2026-02-07.csv', name: 'CSV Local (fecha)' });
-  sources.push({ url: 'data.csv', name: 'CSV Local (data)' });
+  if (SHEET_URL)       sources.push({ url: SHEET_URL,       name: 'Google Sheet' });
+  if (DRIVE_URL)       sources.push({ url: DRIVE_URL,       name: 'Google Drive' });
+  sources.push({ url: LOCAL_CSV,                            name: 'CSV Local' });
+  sources.push({ url: 'Reporte_Ranking_2026-02-07.csv',     name: 'CSV Local (fecha)' });
+  sources.push({ url: 'data.csv',                           name: 'CSV Local (data)' });
 
   for (const src of sources) {
     if (loaded) break;
     try {
       console.log(`⏳ Intentando: ${src.name}`);
       const resp = await fetch(src.url, { redirect: 'follow' });
-      console.log(`   Status: ${resp.status} | Type: ${resp.headers.get('content-type')}`);
       if (!resp.ok) continue;
-
       let text = await resp.text();
-      // Limpiar BOM y espacios
       text = text.replace(/^\uFEFF/, '').trim();
-      console.log(`   Recibido: ${text.length} chars | Inicio: ${text.substring(0, 60)}...`);
 
-      // Intentar parsear como JSON (Apps Script devuelve JSON)
       if (text.charAt(0) === '[' || text.charAt(0) === '{') {
         try {
           let json = JSON.parse(text);
-          // Si es un objeto con error, saltar
-          if (json.error) { console.warn(`   ⚠️ Error del server: ${json.error}`); continue; }
-          // Si es array con datos
+          if (json.error) continue;
           if (Array.isArray(json) && json.length > 0) {
-            // Verificar que tiene las columnas esperadas
             const keys = Object.keys(json[0]);
             if (keys.includes('RUBRO') || keys.includes('COD_ARTICULO') || keys.includes('r')) {
-              // Si usa claves compactas (r, sr, cod...) expandirlas
               if (keys.includes('r') && !keys.includes('RUBRO')) {
                 DATA = json.map(r => ({
                   RUBRO: r.r, SUBRUBRO: r.sr, COD_ARTICULO: r.cod,
@@ -956,39 +849,28 @@ async function loadData() {
                   STOCK_CD: r.scd, STOCK_CA: r.sca, STOCK_CN: r.scn,
                   L1: r.l1, NOM_PROVEE: r.prov, SKU_PROVEEDOR: r.sku_p, COD_BARRA: r.cb,
                 }));
-              } else {
-                DATA = json;
-              }
+              } else { DATA = json; }
               loaded = true;
-              console.log(`   ✅ JSON cargado: ${DATA.length} registros`);
+              console.log(`✅ JSON: ${DATA.length} registros`);
               break;
             }
           }
-        } catch(e) { console.warn(`   JSON parse falló, intentando CSV:`, e.message); }
+        } catch(e) { console.warn('JSON parse falló:', e.message); }
       }
-
-      // Intentar parsear como CSV
       if (!loaded && text.includes(';') && (text.includes('RUBRO') || text.includes('COD_ARTICULO'))) {
         DATA = parseCSV(text);
-        if (DATA.length > 0) {
-          loaded = true;
-          console.log(`   ✅ CSV cargado: ${DATA.length} registros`);
-          break;
-        }
+        if (DATA.length > 0) { loaded = true; console.log(`✅ CSV: ${DATA.length} registros`); break; }
       }
-    } catch(e) { console.warn(`   ❌ ${src.name}: ${e.message}`); }
+    } catch(e) { console.warn(`❌ ${src.name}: ${e.message}`); }
   }
 
   showLoading(false);
 
   if (!DATA.length) {
     showError(`No se pudieron cargar los datos.<br><br>
-      <span style="font-size:13px;color:var(--text-secondary)">
-      Opciones para conectar los datos:<br>
-      1. <b>Google Apps Script</b> (recomendado) - Configurá APPS_SCRIPT_URL<br>
-      2. <b>Google Sheet</b> publicada como CSV - Configurá SHEET_ID<br>  
-      3. <b>CSV local</b> - Poné el .csv en la misma carpeta que este HTML<br>
-      4. <b>GitHub Pages</b> - Subí ambos archivos al repositorio
+      <span style="font-size:13px;color:#4a6375">
+      1. Configurá APPS_SCRIPT_URL con tu Web App<br>
+      2. O colocá el CSV en la misma carpeta que este archivo
       </span>`);
     return;
   }
@@ -1002,48 +884,40 @@ async function loadData() {
 function populateFilters() {
   const rubros = [...new Set(DATA.map(r => r.RUBRO))].sort();
   const proveedores = [...new Set(DATA.map(r => r.NOM_PROVEE).filter(p => p))].sort();
-
   const selR = document.getElementById('filterRubro');
-  selR.innerHTML = '<option value="">Todos los Rubros</option>' +
-    rubros.map(r => `<option value="${r}">${r}</option>`).join('');
-
+  selR.innerHTML = '<option value="">Todos los Rubros</option>' + rubros.map(r => `<option value="${r}">${r}</option>`).join('');
   const selP = document.getElementById('filterProveedor');
-  selP.innerHTML = '<option value="">Todos los Proveedores</option>' +
-    proveedores.map(p => `<option value="${p}">${p}</option>`).join('');
+  selP.innerHTML = '<option value="">Todos los Proveedores</option>' + proveedores.map(p => `<option value="${p}">${p}</option>`).join('');
 }
-
 function updateSubrubros() {
   const rubro = document.getElementById('filterRubro').value;
   const subs = rubro
     ? [...new Set(DATA.filter(r => r.RUBRO === rubro).map(r => r.SUBRUBRO))].sort()
     : [...new Set(DATA.map(r => r.SUBRUBRO))].sort();
   const sel = document.getElementById('filterSubrubro');
-  sel.innerHTML = '<option value="">Todos</option>' +
-    subs.map(s => `<option value="${s}">${s}</option>`).join('');
+  sel.innerHTML = '<option value="">Todos</option>' + subs.map(s => `<option value="${s}">${s}</option>`).join('');
 }
-
 function applyFilters() {
-  const rubro = document.getElementById('filterRubro').value;
-  const subrubro = document.getElementById('filterSubrubro').value;
-  const proveedor = document.getElementById('filterProveedor').value;
-  const stockFilter = document.getElementById('filterStock').value;
-  const search = document.getElementById('filterSearch').value.toLowerCase();
+  const rubro      = document.getElementById('filterRubro').value;
+  const subrubro   = document.getElementById('filterSubrubro').value;
+  const proveedor  = document.getElementById('filterProveedor').value;
+  const stockFilter= document.getElementById('filterStock').value;
+  const search     = document.getElementById('filterSearch').value.toLowerCase();
 
   FILTERED = DATA.filter(r => {
-    if (rubro && r.RUBRO !== rubro) return false;
-    if (subrubro && r.SUBRUBRO !== subrubro) return false;
+    if (rubro     && r.RUBRO      !== rubro)     return false;
+    if (subrubro  && r.SUBRUBRO   !== subrubro)  return false;
     if (proveedor && r.NOM_PROVEE !== proveedor) return false;
     if (search) {
       const hay = (r.COD_ARTICULO + ' ' + r.ARTICULO + ' ' + r.NOM_PROVEE + ' ' + r.COD_BARRA).toLowerCase();
       if (!hay.includes(search)) return false;
     }
-    const stock = num(r.STOCK);
-    const vtaMes = num(r.VentasUltimoMes);
-    const vta3m = num(r.VentasUltimos3Meses);
+    const stock   = num(r.STOCK);
+    const vtaMes  = num(r.VentasUltimoMes);
+    const vta3m   = num(r.VentasUltimos3Meses);
     const promMes = vta3m / 3;
-
-    if (stockFilter === 'con' && stock <= 0) return false;
-    if (stockFilter === 'sin' && stock > 0) return false;
+    if (stockFilter === 'con'    && stock <= 0) return false;
+    if (stockFilter === 'sin'    && stock > 0)  return false;
     if (stockFilter === 'quiebre' && !(stock <= 0 && vtaMes > 0)) return false;
     if (stockFilter === 'sobre') {
       if (stock <= 0) return false;
@@ -1052,34 +926,26 @@ function applyFilters() {
     }
     return true;
   });
-
   currentPages = { ranking: 1, sobrestock: 1, sinmov: 1 };
   renderAll();
 }
 
-// ===== SETUP FILTER EVENTS =====
-document.getElementById('filterRubro').addEventListener('change', () => { updateSubrubros(); applyFilters(); });
-document.getElementById('filterSubrubro').addEventListener('change', applyFilters);
+document.getElementById('filterRubro').addEventListener('change',    () => { updateSubrubros(); applyFilters(); });
+document.getElementById('filterSubrubro').addEventListener('change',  applyFilters);
 document.getElementById('filterProveedor').addEventListener('change', applyFilters);
-document.getElementById('filterStock').addEventListener('change', applyFilters);
+document.getElementById('filterStock').addEventListener('change',     applyFilters);
 let searchTimeout;
 document.getElementById('filterSearch').addEventListener('input', () => {
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(applyFilters, 300);
 });
-
-// ===== SETUP SORT EVENTS =====
-// Enable sorting on ranking table headers with data-sort attributes
 document.querySelectorAll('#tableRanking thead th[data-sort]').forEach(th => {
   th.addEventListener('click', () => {
     const key = th.getAttribute('data-sort');
-    // Toggle direction if clicking the same column; otherwise set new field
-    if (sortConfig.key === key) {
-      sortConfig.asc = !sortConfig.asc;
-    } else {
+    if (sortConfig.key === key) { sortConfig.asc = !sortConfig.asc; }
+    else {
       sortConfig.key = key;
-      // Default sort direction: numeric fields descending, text ascending
-      const numeric = ['STOCK', 'VentasUltimoMes', 'VentasUltimos3Meses', 'VentasUltimoAnio'];
+      const numeric = ['STOCK','STOCK_CD','STOCK_CA','VentasUltimoMes','VentasUltimos3Meses','VentasUltimoAnio'];
       sortConfig.asc = !numeric.includes(key);
     }
     currentPages.ranking = 1;
@@ -1089,129 +955,101 @@ document.querySelectorAll('#tableRanking thead th[data-sort]').forEach(th => {
 
 // ===== RENDER ALL =====
 function renderAll() {
-  renderKPIs();
-  renderHealth();
-  renderChartRubro();
-  renderChartStockRubro();
-  renderChartProveedores();
-  renderChartCobertura();
-  renderTableRanking();
-  renderTableQuiebres();
-  renderTableSobrestock();
-  renderTableSinmov();
+  renderKPIs(); renderHealth();
+  renderChartRubro(); renderChartStockRubro();
+  renderChartProveedores(); renderChartCobertura();
+  renderTableRanking(); renderTableQuiebres();
+  renderTableSobrestock(); renderTableSinmov();
 }
 
 // ===== KPIs =====
 function renderKPIs() {
   const d = FILTERED;
-  const totalSkus = d.length;
-  const conStock = d.filter(r => num(r.STOCK) > 0).length;
-  const stockTotal = d.reduce((s, r) => s + num(r.STOCK), 0);
-  // Calcular stock total por depósito CD y CA
-  const stockCDTotal = d.reduce((s, r) => s + (r.STOCK_CD ? num(r.STOCK_CD) : 0), 0);
-  const stockCATotal = d.reduce((s, r) => s + (r.STOCK_CA ? num(r.STOCK_CA) : 0), 0);
-  const vtaMes = d.reduce((s, r) => s + num(r.VentasUltimoMes), 0);
-  const vta3m = d.reduce((s, r) => s + num(r.VentasUltimos3Meses), 0);
-  const quiebres = d.filter(r => num(r.STOCK) <= 0 && num(r.VentasUltimoMes) > 0).length;
-
-  // Cobertura promedio ponderada
+  const totalSkus   = d.length;
+  const conStock    = d.filter(r => num(r.STOCK) > 0).length;
+  const stockTotal  = d.reduce((s, r) => s + num(r.STOCK), 0);
+  const stockCDTotal= d.reduce((s, r) => s + (r.STOCK_CD ? num(r.STOCK_CD) : 0), 0);
+  const stockCATotal= d.reduce((s, r) => s + (r.STOCK_CA ? num(r.STOCK_CA) : 0), 0);
+  const vtaMes      = d.reduce((s, r) => s + num(r.VentasUltimoMes), 0);
+  const vta3m       = d.reduce((s, r) => s + num(r.VentasUltimos3Meses), 0);
+  const quiebres    = d.filter(r => num(r.STOCK) <= 0 && num(r.VentasUltimoMes) > 0).length;
   let cobNum = 0, cobDen = 0;
   d.forEach(r => {
-    const stock = num(r.STOCK);
-    const prom = num(r.VentasUltimos3Meses) / 3;
-    if (stock > 0 && prom > 0) {
-      cobNum += stock;
-      cobDen += prom;
-    }
+    const stock = num(r.STOCK), prom = num(r.VentasUltimos3Meses) / 3;
+    if (stock > 0 && prom > 0) { cobNum += stock; cobDen += prom; }
   });
-  const cobProm = cobDen > 0 ? (cobNum / cobDen) : 0;
 
-  document.getElementById('kpiSkus').textContent = fmt(totalSkus);
-  document.getElementById('kpiSkusSub').textContent = `${fmt(conStock)} con stock (${totalSkus > 0 ? Math.round(conStock/totalSkus*100) : 0}%)`;
-  document.getElementById('kpiStock').textContent = fmt(stockTotal);
-  // Actualizar KPIs de depósitos CD y CA si existen en el DOM
-  const elStockCD = document.getElementById('kpiStockCD');
-  const elStockCA = document.getElementById('kpiStockCA');
-  if (elStockCD) {
-    elStockCD.textContent = fmt(stockCDTotal);
-    const sub = document.getElementById('kpiStockCDSub');
-    if (sub) sub.textContent = `unidades en CD (${totalSkus > 0 ? Math.round(stockCDTotal/stockTotal*100) : 0}%)`;
-  }
-  if (elStockCA) {
-    elStockCA.textContent = fmt(stockCATotal);
-    const sub = document.getElementById('kpiStockCASub');
-    if (sub) sub.textContent = `unidades en CA (${totalSkus > 0 ? Math.round(stockCATotal/stockTotal*100) : 0}%)`;
-  }
-  document.getElementById('kpiVtaMes').textContent = fmt(vtaMes);
-  document.getElementById('kpiVta3m').textContent = fmt(vta3m);
-  document.getElementById('kpiQuiebres').textContent = fmt(quiebres);
-  document.getElementById('kpiCobertura').textContent = cobProm.toFixed(1);
+  document.getElementById('kpiSkus').textContent      = fmt(totalSkus);
+  document.getElementById('kpiSkusSub').textContent   = `${fmt(conStock)} con stock (${totalSkus > 0 ? Math.round(conStock/totalSkus*100) : 0}%)`;
+  document.getElementById('kpiStock').textContent     = fmt(stockTotal);
+  document.getElementById('kpiVtaMes').textContent    = fmt(vtaMes);
+  document.getElementById('kpiVta3m').textContent     = fmt(vta3m);
+  document.getElementById('kpiQuiebres').textContent  = fmt(quiebres);
+  document.getElementById('kpiCobertura').textContent = cobDen > 0 ? (cobNum / cobDen).toFixed(1) : '--';
+
+  const elCD = document.getElementById('kpiStockCD');
+  const elCA = document.getElementById('kpiStockCA');
+  if (elCD) { elCD.textContent = fmt(stockCDTotal); const s = document.getElementById('kpiStockCDSub'); if(s) s.textContent = `unidades en CD (${stockTotal>0?Math.round(stockCDTotal/stockTotal*100):0}%)`; }
+  if (elCA) { elCA.textContent = fmt(stockCATotal); const s = document.getElementById('kpiStockCASub'); if(s) s.textContent = `unidades en CA (${stockTotal>0?Math.round(stockCATotal/stockTotal*100):0}%)`; }
 }
 
 // ===== HEALTH =====
 function renderHealth() {
   let ok = 0, sobre = 0, quiebre = 0, sinMov = 0;
   FILTERED.forEach(r => {
-    const stock = num(r.STOCK);
-    const vtaMes = num(r.VentasUltimoMes);
-    const vta3m = num(r.VentasUltimos3Meses);
-    const promMes = vta3m / 3;
-
-    if (stock <= 0 && vtaMes > 0) { quiebre++; }
-    else if (stock > 0 && promMes > 0 && stock / promMes <= 6) { ok++; }
-    else if (stock > 0 && (promMes <= 0 || stock / promMes > 6)) { sobre++; }
-    else { sinMov++; }
+    const stock = num(r.STOCK), vtaMes = num(r.VentasUltimoMes), promMes = num(r.VentasUltimos3Meses) / 3;
+    if (stock <= 0 && vtaMes > 0)                              quiebre++;
+    else if (stock > 0 && promMes > 0 && stock/promMes <= 6)  ok++;
+    else if (stock > 0 && (promMes <= 0 || stock/promMes > 6))sobre++;
+    else                                                        sinMov++;
   });
-
-  document.getElementById('healthOk').textContent = fmt(ok);
-  document.getElementById('healthSobre').textContent = fmt(sobre);
+  document.getElementById('healthOk').textContent      = fmt(ok);
+  document.getElementById('healthSobre').textContent   = fmt(sobre);
   document.getElementById('healthQuiebre').textContent = fmt(quiebre);
-  document.getElementById('healthSinMov').textContent = fmt(sinMov);
-
+  document.getElementById('healthSinMov').textContent  = fmt(sinMov);
   const total = ok + sobre + quiebre + sinMov || 1;
   document.getElementById('healthBar').innerHTML =
-    `<div style="width:${ok/total*100}%;background:var(--accent-emerald)" title="Stock Óptimo: ${ok}"></div>` +
-    `<div style="width:${sobre/total*100}%;background:var(--accent-amber)" title="Sobrestock: ${sobre}"></div>` +
-    `<div style="width:${quiebre/total*100}%;background:var(--accent-red)" title="Quiebre: ${quiebre}"></div>` +
-    `<div style="width:${sinMov/total*100}%;background:var(--text-muted)" title="Sin Movimiento: ${sinMov}"></div>`;
+    `<div style="width:${ok/total*100}%;background:#1a7a4e" title="Óptimo: ${ok}"></div>` +
+    `<div style="width:${sobre/total*100}%;background:#c47d0e" title="Sobrestock: ${sobre}"></div>` +
+    `<div style="width:${quiebre/total*100}%;background:#c0392b" title="Quiebre: ${quiebre}"></div>` +
+    `<div style="width:${sinMov/total*100}%;background:#ccdde6" title="Sin Movimiento: ${sinMov}"></div>`;
 }
 
-// ===== CHART COLORS =====
-const COLORS = ['#3b82f6','#06b6d4','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316','#6366f1','#84cc16','#e879f9','#22d3ee','#fb923c','#a78bfa'];
+// ===== COLORES GRÁFICOS (paleta CHEMES clara) =====
+const COLORS = [
+  '#2596be','#1a7a4e','#c47d0e','#6b3ca8','#c0392b',
+  '#7ecfe0','#27ae60','#e6a817','#9b59b6','#e74c3c',
+  '#14637f','#1a7a9e','#4a6375','#a0357a','#7a96a6'
+];
 
 function chartDefaults() {
   const mobile = window.innerWidth < 768;
   return {
     responsive: true, maintainAspectRatio: false,
     plugins: {
-      // Show legend only when explicitly enabled per chart.
       legend: { display: false },
-      // Tooltip styling
       tooltip: {
-        backgroundColor: 'rgba(26,34,54,0.95)',
-        titleFont: { family: 'DM Sans', size: 13 },
-        bodyFont: { family: 'Space Mono', size: 12 },
-        borderColor: 'rgba(42,54,84,0.5)', borderWidth: 1,
+        backgroundColor: 'rgba(255,255,255,0.97)',
+        titleColor: '#1a2e3b',
+        bodyColor: '#4a6375',
+        titleFont: { family: 'DM Sans', size: 13, weight: '600' },
+        bodyFont:  { family: 'Space Mono', size: 12 },
+        borderColor: '#ccdde6', borderWidth: 1,
         padding: 12, cornerRadius: 8,
       },
-      // Enable zoom and pan interactions on all charts by default.
       zoom: {
-        pan: { enabled: true, mode: 'xy' },
-        zoom: {
-          wheel: { enabled: true },
-          pinch: { enabled: true },
-          mode: 'xy'
-        }
+        pan:  { enabled: true, mode: 'xy' },
+        zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }
       }
     },
     scales: {
       x: {
-        ticks: { color: '#5a6478', font: { family: 'DM Sans', size: mobile ? 9 : 11 }, maxRotation: mobile ? 45 : 0 },
-        grid: { color: 'rgba(42,54,84,0.3)' },
+        ticks: { color: '#7a96a6', font: { family: 'DM Sans', size: mobile ? 9 : 11 }, maxRotation: mobile ? 45 : 0 },
+        grid:  { color: 'rgba(204,221,230,0.6)' },
       },
       y: {
-        ticks: { color: '#5a6478', font: { family: mobile ? 'DM Sans' : 'Space Mono', size: mobile ? 9 : 11 } },
-        grid: { color: 'rgba(42,54,84,0.3)' },
+        ticks: { color: '#7a96a6', font: { family: mobile ? 'DM Sans' : 'Space Mono', size: mobile ? 9 : 11 } },
+        grid:  { color: 'rgba(204,221,230,0.6)' },
       }
     }
   };
@@ -1226,42 +1064,21 @@ function setRubroChart(mode, btn) {
   renderChartRubro();
 }
 function renderChartRubro() {
-  const agg = {};
   const field = rubroChartMode === 'mes' ? 'VentasUltimoMes' : rubroChartMode === '3m' ? 'VentasUltimos3Meses' : 'VentasUltimoAnio';
-  FILTERED.forEach(r => {
-    const rb = r.RUBRO;
-    agg[rb] = (agg[rb] || 0) + num(r[field]);
-  });
-  const sorted = Object.entries(agg).sort((a, b) => b[1] - a[1]).slice(0, window.innerWidth < 768 ? 8 : 12);
-  const labels = sorted.map(s => s[0].length > 18 ? s[0].substring(0, 18) + '…' : s[0]);
-  const values = sorted.map(s => s[1]);
-
+  const agg = {};
+  FILTERED.forEach(r => { agg[r.RUBRO] = (agg[r.RUBRO] || 0) + num(r[field]); });
+  const sorted = Object.entries(agg).sort((a,b) => b[1]-a[1]).slice(0, window.innerWidth < 768 ? 8 : 12);
   if (CHARTS.rubro) CHARTS.rubro.destroy();
   CHARTS.rubro = new Chart(document.getElementById('chartRubro'), {
     type: 'bar',
     data: {
-      labels,
-      datasets: [{
-        data: values,
-        backgroundColor: COLORS.slice(0, labels.length).map(c => c + '99'),
-        borderColor: COLORS.slice(0, labels.length),
-        borderWidth: 1, borderRadius: 6, barPercentage: 0.7,
-      }]
+      labels: sorted.map(s => s[0].length > 18 ? s[0].substring(0,18)+'…' : s[0]),
+      datasets: [{ data: sorted.map(s=>s[1]), backgroundColor: COLORS.map(c=>c+'bb'), borderColor: COLORS, borderWidth:1, borderRadius:5, barPercentage:0.7 }]
     },
     options: {
-      ...chartDefaults(),
-      indexAxis: 'y',
-      scales: {
-        ...chartDefaults().scales,
-        x: { ...chartDefaults().scales.x, ticks: { ...chartDefaults().scales.x.ticks, callback: v => fmt(v) } }
-      },
-      plugins: {
-        ...chartDefaults().plugins,
-        tooltip: {
-          ...chartDefaults().plugins.tooltip,
-          callbacks: { label: ctx => `${fmt(ctx.raw)} uds` }
-        }
-      }
+      ...chartDefaults(), indexAxis:'y',
+      scales: { ...chartDefaults().scales, x: { ...chartDefaults().scales.x, ticks: { ...chartDefaults().scales.x.ticks, callback: v => fmt(v) } } },
+      plugins: { ...chartDefaults().plugins, tooltip: { ...chartDefaults().plugins.tooltip, callbacks: { label: ctx => `${fmt(ctx.raw)} uds` } } }
     }
   });
 }
@@ -1269,36 +1086,24 @@ function renderChartRubro() {
 // ===== CHART: Stock por Rubro =====
 function renderChartStockRubro() {
   const agg = {};
-  FILTERED.forEach(r => {
-    const rb = r.RUBRO;
-    agg[rb] = (agg[rb] || 0) + num(r.STOCK);
-  });
-  const sorted = Object.entries(agg).filter(s => s[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 10);
-
+  FILTERED.forEach(r => { agg[r.RUBRO] = (agg[r.RUBRO] || 0) + num(r.STOCK); });
+  const sorted = Object.entries(agg).filter(s=>s[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,10);
   if (CHARTS.stockRubro) CHARTS.stockRubro.destroy();
   CHARTS.stockRubro = new Chart(document.getElementById('chartStockRubro'), {
     type: 'doughnut',
     data: {
-      labels: sorted.map(s => s[0]),
-      datasets: [{
-        data: sorted.map(s => s[1]),
-        backgroundColor: COLORS.slice(0, sorted.length),
-        borderColor: '#1a2236', borderWidth: 3,
-      }]
+      labels: sorted.map(s=>s[0]),
+      datasets: [{ data: sorted.map(s=>s[1]), backgroundColor: COLORS.slice(0,sorted.length), borderColor:'#ffffff', borderWidth:3 }]
     },
     options: {
-      responsive: true, maintainAspectRatio: false, cutout: '60%',
+      responsive:true, maintainAspectRatio:false, cutout:'60%',
       plugins: {
-        // Inherit default plugin settings (including zoom) then override legend and tooltip.
         ...chartDefaults().plugins,
         legend: {
           position: window.innerWidth < 768 ? 'bottom' : 'right',
-          labels: { color: '#8892a8', font: { family: 'DM Sans', size: 11 }, padding: 8, boxWidth: 12, boxHeight: 12, borderRadius: 3 }
+          labels: { color:'#4a6375', font:{ family:'DM Sans', size:11 }, padding:8, boxWidth:11, boxHeight:11, borderRadius:3 }
         },
-        tooltip: {
-          ...chartDefaults().plugins.tooltip,
-          callbacks: { label: ctx => `${ctx.label}: ${fmt(ctx.raw)} uds` }
-        }
+        tooltip: { ...chartDefaults().plugins.tooltip, callbacks: { label: ctx => `${ctx.label}: ${fmt(ctx.raw)} uds` } }
       }
     }
   });
@@ -1313,43 +1118,23 @@ function setProvChart(mode, btn) {
   renderChartProveedores();
 }
 function renderChartProveedores() {
-  const agg = {};
   const field = provChartMode === 'ventas' ? 'VentasUltimoAnio' : 'STOCK';
-  FILTERED.forEach(r => {
-    const p = r.NOM_PROVEE;
-    if (!p) return;
-    agg[p] = (agg[p] || 0) + num(r[field]);
-  });
-  const sorted = Object.entries(agg).sort((a, b) => b[1] - a[1]).slice(0, window.innerWidth < 768 ? 8 : 15);
-  const labels = sorted.map(s => s[0].length > 22 ? s[0].substring(0, 22) + '…' : s[0]);
-  const values = sorted.map(s => s[1]);
-
+  const agg = {};
+  FILTERED.forEach(r => { if (!r.NOM_PROVEE) return; agg[r.NOM_PROVEE] = (agg[r.NOM_PROVEE]||0) + num(r[field]); });
+  const sorted = Object.entries(agg).sort((a,b)=>b[1]-a[1]).slice(0, window.innerWidth < 768 ? 8 : 15);
+  const color   = provChartMode === 'ventas' ? '#1a7a4e' : '#6b3ca8';
+  const colorBg = provChartMode === 'ventas' ? '#1a7a4ebb' : '#6b3ca8bb';
   if (CHARTS.prov) CHARTS.prov.destroy();
   CHARTS.prov = new Chart(document.getElementById('chartProveedores'), {
     type: 'bar',
     data: {
-      labels,
-      datasets: [{
-        data: values,
-        backgroundColor: provChartMode === 'ventas' ? '#10b98199' : '#8b5cf699',
-        borderColor: provChartMode === 'ventas' ? '#10b981' : '#8b5cf6',
-        borderWidth: 1, borderRadius: 6, barPercentage: 0.65,
-      }]
+      labels: sorted.map(s => s[0].length > 22 ? s[0].substring(0,22)+'…' : s[0]),
+      datasets: [{ data: sorted.map(s=>s[1]), backgroundColor: colorBg, borderColor: color, borderWidth:1, borderRadius:5, barPercentage:0.65 }]
     },
     options: {
-      ...chartDefaults(),
-      indexAxis: 'y',
-      scales: {
-        ...chartDefaults().scales,
-        x: { ...chartDefaults().scales.x, ticks: { ...chartDefaults().scales.x.ticks, callback: v => fmt(v) } }
-      },
-      plugins: {
-        ...chartDefaults().plugins,
-        tooltip: {
-          ...chartDefaults().plugins.tooltip,
-          callbacks: { label: ctx => `${fmt(ctx.raw)} uds` }
-        }
-      }
+      ...chartDefaults(), indexAxis:'y',
+      scales: { ...chartDefaults().scales, x: { ...chartDefaults().scales.x, ticks: { ...chartDefaults().scales.x.ticks, callback: v => fmt(v) } } },
+      plugins: { ...chartDefaults().plugins, tooltip: { ...chartDefaults().plugins.tooltip, callbacks: { label: ctx => `${fmt(ctx.raw)} uds` } } }
     }
   });
 }
@@ -1358,105 +1143,63 @@ function renderChartProveedores() {
 function renderChartCobertura() {
   const agg = {};
   FILTERED.forEach(r => {
-    const rb = r.RUBRO;
-    if (!agg[rb]) agg[rb] = { stock: 0, vtaMes: 0 };
-    agg[rb].stock += num(r.STOCK);
-    agg[rb].vtaMes += num(r.VentasUltimos3Meses) / 3;
+    if (!agg[r.RUBRO]) agg[r.RUBRO] = { stock:0, vtaMes:0 };
+    agg[r.RUBRO].stock  += num(r.STOCK);
+    agg[r.RUBRO].vtaMes += num(r.VentasUltimos3Meses) / 3;
   });
-  const items = Object.entries(agg)
-    .filter(([_, v]) => v.vtaMes > 0)
-    .map(([rb, v]) => [rb, v.stock / v.vtaMes])
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 12);
-
-  const labels = items.map(s => s[0].length > 18 ? s[0].substring(0, 18) + '…' : s[0]);
-  const values = items.map(s => Math.round(s[1] * 10) / 10);
-  const bgColors = values.map(v => v > 6 ? '#f59e0b99' : v < 1.5 ? '#ef444499' : '#10b98199');
-  const bdColors = values.map(v => v > 6 ? '#f59e0b' : v < 1.5 ? '#ef4444' : '#10b981');
-
+  const items = Object.entries(agg).filter(([_,v]) => v.vtaMes > 0)
+    .map(([rb,v]) => [rb, v.stock/v.vtaMes])
+    .sort((a,b) => b[1]-a[1]).slice(0,12);
+  const values  = items.map(s => Math.round(s[1]*10)/10);
+  const bgColors = values.map(v => v>6 ? '#c47d0ebb' : v<1.5 ? '#c0392bbb' : '#1a7a4ebb');
+  const bdColors = values.map(v => v>6 ? '#c47d0e'   : v<1.5 ? '#c0392b'   : '#1a7a4e');
   if (CHARTS.cobertura) CHARTS.cobertura.destroy();
   CHARTS.cobertura = new Chart(document.getElementById('chartCobertura'), {
     type: 'bar',
     data: {
-      labels,
-      datasets: [{
-        data: values,
-        backgroundColor: bgColors,
-        borderColor: bdColors,
-        borderWidth: 1, borderRadius: 6, barPercentage: 0.65,
-      }]
+      labels: items.map(s => s[0].length > 18 ? s[0].substring(0,18)+'…' : s[0]),
+      datasets: [{ data: values, backgroundColor: bgColors, borderColor: bdColors, borderWidth:1, borderRadius:5, barPercentage:0.65 }]
     },
     options: {
-      ...chartDefaults(),
-      indexAxis: 'y',
-      plugins: {
-        ...chartDefaults().plugins,
-        tooltip: {
-          ...chartDefaults().plugins.tooltip,
-          callbacks: { label: ctx => `${ctx.raw} meses de cobertura` }
-        },
-        annotation: {}
-      }
+      ...chartDefaults(), indexAxis:'y',
+      plugins: { ...chartDefaults().plugins, tooltip: { ...chartDefaults().plugins.tooltip, callbacks: { label: ctx => `${ctx.raw} meses de cobertura` } }, annotation:{} }
     }
   });
 }
 
 // ===== TABLE HELPERS =====
 function getStatus(r) {
-  const stock = num(r.STOCK);
-  const vtaMes = num(r.VentasUltimoMes);
-  const vta3m = num(r.VentasUltimos3Meses);
-  const promMes = vta3m / 3;
-
-  if (stock <= 0 && vtaMes > 0) return { label: 'Quiebre', cls: 'badge-danger' };
-  if (stock > 0 && promMes > 0) {
-    const cob = stock / promMes;
-    if (cob <= 6) return { label: 'Óptimo', cls: 'badge-ok' };
-    return { label: 'Sobrestock', cls: 'badge-warn' };
-  }
-  if (stock > 0 && promMes <= 0) return { label: 'Sin Rotación', cls: 'badge-warn' };
-  if (stock <= 0 && vtaMes <= 0 && num(r.VentasUltimoAnio) > 0) return { label: 'Agotado', cls: 'badge-muted' };
-  return { label: 'Inactivo', cls: 'badge-muted' };
+  const stock = num(r.STOCK), vtaMes = num(r.VentasUltimoMes), promMes = num(r.VentasUltimos3Meses)/3;
+  if (stock <= 0 && vtaMes > 0)                          return { label:'Quiebre',    cls:'badge-danger' };
+  if (stock > 0 && promMes > 0 && stock/promMes <= 6)    return { label:'Óptimo',     cls:'badge-ok' };
+  if (stock > 0 && (promMes <= 0 || stock/promMes > 6))  return { label:'Sobrestock', cls:'badge-warn' };
+  if (stock <= 0 && vtaMes <= 0 && num(r.VentasUltimoAnio) > 0) return { label:'Agotado', cls:'badge-muted' };
+  return { label:'Inactivo', cls:'badge-muted' };
 }
-
 function coberturaBar(r) {
-  const stock = num(r.STOCK);
-  const promMes = num(r.VentasUltimos3Meses) / 3;
-  if (promMes <= 0 || stock <= 0) return '<span style="color:var(--text-muted)">—</span>';
+  const stock = num(r.STOCK), promMes = num(r.VentasUltimos3Meses)/3;
+  if (promMes <= 0 || stock <= 0) return '<span style="color:#7a96a6">—</span>';
   const meses = stock / promMes;
-  const pct = Math.min(meses / 12 * 100, 100);
-  const color = meses > 6 ? 'var(--accent-amber)' : meses < 1.5 ? 'var(--accent-red)' : 'var(--accent-emerald)';
-  // Formatear: si es mayor a 24 meses mostrar ">24m", si no mostrar con 1 decimal
-  const label = meses > 24 ? '>24m' : meses.toFixed(1) + 'm';
+  const pct   = Math.min(meses/12*100, 100);
+  const color = meses > 6 ? '#c47d0e' : meses < 1.5 ? '#c0392b' : '#1a7a4e';
+  const label = meses > 24 ? '>24m' : meses.toFixed(1)+'m';
   return `<div class="bar-cell">
-    <div style="flex:1;background:var(--bg-secondary);border-radius:3px;height:6px">
+    <div style="flex:1;background:#e4ecf1;border-radius:3px;height:5px">
       <div class="bar-mini" style="width:${pct}%;background:${color}"></div>
     </div>
     <span style="font-family:'Space Mono';font-size:11px;color:${color};min-width:40px;text-align:right">${label}</span>
   </div>`;
 }
-
 function renderPagination(containerId, infoId, btnsId, total, page, callback) {
-  const pages = Math.ceil(total / PAGE_SIZE) || 1;
+  const pages = Math.ceil(total/PAGE_SIZE) || 1;
   document.getElementById(infoId).textContent = `${fmt(total)} artículos · Página ${page} de ${pages}`;
   const btns = document.getElementById(btnsId);
   btns.innerHTML = '';
   if (pages <= 1) return;
-  const start = Math.max(1, page - 2);
-  const end = Math.min(pages, page + 2);
-  if (page > 1) {
-    const b = document.createElement('button');
-    b.textContent = '‹'; b.onclick = () => callback(page - 1); btns.appendChild(b);
-  }
-  for (let i = start; i <= end; i++) {
-    const b = document.createElement('button');
-    b.textContent = i; b.className = i === page ? 'active' : '';
-    b.onclick = () => callback(i); btns.appendChild(b);
-  }
-  if (page < pages) {
-    const b = document.createElement('button');
-    b.textContent = '›'; b.onclick = () => callback(page + 1); btns.appendChild(b);
-  }
+  const start = Math.max(1, page-2), end = Math.min(pages, page+2);
+  if (page > 1)    { const b=document.createElement('button'); b.textContent='‹'; b.onclick=()=>callback(page-1); btns.appendChild(b); }
+  for (let i=start; i<=end; i++) { const b=document.createElement('button'); b.textContent=i; b.className=i===page?'active':''; b.onclick=()=>callback(i); btns.appendChild(b); }
+  if (page<pages)  { const b=document.createElement('button'); b.textContent='›'; b.onclick=()=>callback(page+1); btns.appendChild(b); }
 }
 
 // ===== TABLE: Ranking =====
@@ -1468,52 +1211,40 @@ function setRankPeriod(p, btn) {
   renderTableRanking();
 }
 function renderTableRanking() {
-  const field = rankPeriod === 'mes' ? 'VentasUltimoMes' : rankPeriod === '3m' ? 'VentasUltimos3Meses' : 'VentasUltimoAnio';
-  // Determine sorting: if a column has been selected, sort by that; otherwise sort by the selected period field descending
+  const field = rankPeriod==='mes' ? 'VentasUltimoMes' : rankPeriod==='3m' ? 'VentasUltimos3Meses' : 'VentasUltimoAnio';
   let sorted = [...FILTERED];
   if (sortConfig && sortConfig.key) {
     const key = sortConfig.key;
-    sorted.sort((a, b) => {
-      let valA, valB;
-      const numericKeys = ['STOCK', 'STOCK_CD', 'STOCK_CA', 'VentasUltimoMes', 'VentasUltimos3Meses', 'VentasUltimoAnio'];
-      if (numericKeys.includes(key)) {
-        valA = num(a[key]);
-        valB = num(b[key]);
-      } else {
-        valA = (a[key] || '').toString().toLowerCase();
-        valB = (b[key] || '').toString().toLowerCase();
-      }
-      if (valA < valB) return sortConfig.asc ? -1 : 1;
-      if (valA > valB) return sortConfig.asc ? 1 : -1;
+    sorted.sort((a,b) => {
+      const numeric = ['STOCK','STOCK_CD','STOCK_CA','VentasUltimoMes','VentasUltimos3Meses','VentasUltimoAnio'];
+      let vA = numeric.includes(key) ? num(a[key]) : (a[key]||'').toLowerCase();
+      let vB = numeric.includes(key) ? num(b[key]) : (b[key]||'').toLowerCase();
+      if (vA < vB) return sortConfig.asc ? -1 : 1;
+      if (vA > vB) return sortConfig.asc ?  1 :-1;
       return 0;
     });
-  } else {
-    // Default sort: descending by selected period
-    sorted.sort((a, b) => num(b[field]) - num(a[field]));
-  }
-  const page = currentPages.ranking;
-  const start = (page - 1) * PAGE_SIZE;
-  const slice = sorted.slice(start, start + PAGE_SIZE);
-  const maxVal = sorted.length > 0 ? num(sorted[0][field]) : 1;
+  } else { sorted.sort((a,b) => num(b[field])-num(a[field])); }
 
+  const page = currentPages.ranking;
+  const start = (page-1)*PAGE_SIZE;
+  const slice = sorted.slice(start, start+PAGE_SIZE);
   const tbody = document.getElementById('bodyRanking');
-  // Display a message when no articles match the filters
+
   if (slice.length === 0) {
-    // Ajustar colspan al número de columnas de la tabla (13 en total)
-    tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;color:var(--text-muted);padding:16px">No se encontraron artículos</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;color:#7a96a6;padding:18px">No se encontraron artículos</td></tr>`;
   } else {
-    tbody.innerHTML = slice.map((r, i) => {
+    tbody.innerHTML = slice.map((r,i) => {
       const st = getStatus(r);
       return `<tr>
-        <td style="color:var(--text-muted)">${start + i + 1}</td>
-        <td><span style="font-family:'Space Mono';font-size:12px;color:var(--accent-cyan)">${r.COD_ARTICULO}</span></td>
-        <td title="${r.ARTICULO}">${r.ARTICULO.substring(0, 45)}</td>
-        <td style="color:var(--text-secondary)">${r.RUBRO}</td>
-        <td style="color:var(--text-secondary)">${(r.NOM_PROVEE || '').substring(0, 25)}</td>
+        <td style="color:#7a96a6;font-size:11px">${start+i+1}</td>
+        <td><span style="font-family:'Space Mono';font-size:11px;color:#2596be">${r.COD_ARTICULO}</span></td>
+        <td title="${r.ARTICULO}">${r.ARTICULO.substring(0,45)}</td>
+        <td style="color:#4a6375">${r.RUBRO}</td>
+        <td style="color:#4a6375">${(r.NOM_PROVEE||'').substring(0,25)}</td>
         <td class="num">${fmt(num(r.STOCK))}</td>
         <td class="num">${fmt(num(r.STOCK_CD))}</td>
         <td class="num">${fmt(num(r.STOCK_CA))}</td>
-        <td class="num" style="color:var(--accent-emerald)">${fmt(num(r.VentasUltimoMes))}</td>
+        <td class="num" style="color:#1a7a4e">${fmt(num(r.VentasUltimoMes))}</td>
         <td class="num">${fmt(num(r.VentasUltimos3Meses))}</td>
         <td class="num">${fmt(num(r.VentasUltimoAnio))}</td>
         <td>${coberturaBar(r)}</td>
@@ -1521,110 +1252,75 @@ function renderTableRanking() {
       </tr>`;
     }).join('');
   }
-
-  renderPagination('paginationRanking', 'paginationInfoRanking', 'pageBtnsRanking',
-    sorted.length, page, p => { currentPages.ranking = p; renderTableRanking(); });
-
-  // Add a visual indicator to the sorted column in the ranking table
+  renderPagination('paginationRanking','paginationInfoRanking','pageBtnsRanking', sorted.length, page, p => { currentPages.ranking=p; renderTableRanking(); });
   document.querySelectorAll('#tableRanking thead th').forEach(th => th.classList.remove('sorted'));
-  if (sortConfig && sortConfig.key) {
-    const th = document.querySelector(`#tableRanking thead th[data-sort="${sortConfig.key}"]`);
-    if (th) th.classList.add('sorted');
-  }
+  if (sortConfig && sortConfig.key) { const th = document.querySelector(`#tableRanking thead th[data-sort="${sortConfig.key}"]`); if (th) th.classList.add('sorted'); }
 }
 
 // ===== TABLE: Quiebres =====
 function renderTableQuiebres() {
-  const items = FILTERED
-    .filter(r => num(r.STOCK) <= 0 && num(r.VentasUltimoMes) > 0)
-    .sort((a, b) => num(b.VentasUltimoMes) - num(a.VentasUltimoMes));
-
+  const items = FILTERED.filter(r => num(r.STOCK)<=0 && num(r.VentasUltimoMes)>0).sort((a,b)=>num(b.VentasUltimoMes)-num(a.VentasUltimoMes));
   const tbody = document.getElementById('bodyQuiebres');
-  if (items.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:16px">No se encontraron artículos</td></tr>`;
-  } else {
-    tbody.innerHTML = items.map((r, i) => `<tr>
-      <td style="color:var(--text-muted)">${i + 1}</td>
-      <td><span style="font-family:'Space Mono';font-size:12px;color:var(--accent-red)">${r.COD_ARTICULO}</span></td>
-      <td title="${r.ARTICULO}">${r.ARTICULO.substring(0, 50)}</td>
-      <td style="color:var(--text-secondary)">${r.RUBRO}</td>
-      <td style="color:var(--text-secondary)">${(r.NOM_PROVEE || '').substring(0, 25)}</td>
-      <td class="num" style="color:var(--accent-red)">${fmt(num(r.VentasUltimoMes))}</td>
-      <td class="num">${fmt(num(r.VentasUltimos3Meses))}</td>
-      <td class="num">${fmt(num(r.VentasUltimoAnio))}</td>
-      <td class="num">${fmt(num(r.A_RECEPCIONAR))}</td>
-    </tr>`).join('');
-  }
+  if (!items.length) { tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;color:#7a96a6;padding:18px">No se encontraron artículos</td></tr>`; return; }
+  tbody.innerHTML = items.map((r,i) => `<tr>
+    <td style="color:#7a96a6;font-size:11px">${i+1}</td>
+    <td><span style="font-family:'Space Mono';font-size:11px;color:#c0392b">${r.COD_ARTICULO}</span></td>
+    <td title="${r.ARTICULO}">${r.ARTICULO.substring(0,50)}</td>
+    <td style="color:#4a6375">${r.RUBRO}</td>
+    <td style="color:#4a6375">${(r.NOM_PROVEE||'').substring(0,25)}</td>
+    <td class="num" style="color:#c0392b">${fmt(num(r.VentasUltimoMes))}</td>
+    <td class="num">${fmt(num(r.VentasUltimos3Meses))}</td>
+    <td class="num">${fmt(num(r.VentasUltimoAnio))}</td>
+    <td class="num">${fmt(num(r.A_RECEPCIONAR))}</td>
+  </tr>`).join('');
 }
 
 // ===== TABLE: Sobrestock =====
 function renderTableSobrestock() {
-  const items = FILTERED.filter(r => {
-    const stock = num(r.STOCK);
-    const promMes = num(r.VentasUltimos3Meses) / 3;
-    return stock > 0 && (promMes <= 0 || stock / promMes > 6);
-  }).sort((a, b) => num(b.STOCK) - num(a.STOCK));
-
-  const page = currentPages.sobrestock;
-  const start = (page - 1) * PAGE_SIZE;
-  const slice = items.slice(start, start + PAGE_SIZE);
-
+  const items = FILTERED.filter(r => { const s=num(r.STOCK),p=num(r.VentasUltimos3Meses)/3; return s>0&&(p<=0||s/p>6); }).sort((a,b)=>num(b.STOCK)-num(a.STOCK));
+  const page=currentPages.sobrestock, start=(page-1)*PAGE_SIZE, slice=items.slice(start,start+PAGE_SIZE);
   const tbody = document.getElementById('bodySobrestock');
-  if (items.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:16px">No se encontraron artículos</td></tr>`;
-  } else {
-    tbody.innerHTML = slice.map((r, i) => {
-      const stock = num(r.STOCK);
-      const promMes = num(r.VentasUltimos3Meses) / 3;
-      const cobVal = promMes > 0 ? stock / promMes : Infinity;
-      const cob = cobVal === Infinity ? '∞' : cobVal > 24 ? '>24m' : cobVal.toFixed(1) + 'm';
+  if (!items.length) { tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;color:#7a96a6;padding:18px">No se encontraron artículos</td></tr>`; }
+  else {
+    tbody.innerHTML = slice.map((r,i) => {
+      const stock=num(r.STOCK),promMes=num(r.VentasUltimos3Meses)/3,cobVal=promMes>0?stock/promMes:Infinity;
+      const cob = cobVal===Infinity?'∞':cobVal>24?'>24m':cobVal.toFixed(1)+'m';
       return `<tr>
-        <td style="color:var(--text-muted)">${start + i + 1}</td>
-        <td><span style="font-family:'Space Mono';font-size:12px;color:var(--accent-amber)">${r.COD_ARTICULO}</span></td>
-        <td title="${r.ARTICULO}">${r.ARTICULO.substring(0, 50)}</td>
-        <td style="color:var(--text-secondary)">${r.RUBRO}</td>
-        <td style="color:var(--text-secondary)">${(r.NOM_PROVEE || '').substring(0, 25)}</td>
-        <td class="num" style="color:var(--accent-amber)">${fmt(stock)}</td>
+        <td style="color:#7a96a6;font-size:11px">${start+i+1}</td>
+        <td><span style="font-family:'Space Mono';font-size:11px;color:#c47d0e">${r.COD_ARTICULO}</span></td>
+        <td title="${r.ARTICULO}">${r.ARTICULO.substring(0,50)}</td>
+        <td style="color:#4a6375">${r.RUBRO}</td>
+        <td style="color:#4a6375">${(r.NOM_PROVEE||'').substring(0,25)}</td>
+        <td class="num" style="color:#c47d0e">${fmt(stock)}</td>
         <td class="num">${fmt(num(r.VentasUltimos3Meses))}</td>
-        <td style="color:var(--accent-amber);font-family:'Space Mono';font-size:12px">${cob}</td>
+        <td style="color:#c47d0e;font-family:'Space Mono';font-size:12px">${cob}</td>
       </tr>`;
     }).join('');
   }
-
-  renderPagination('paginationSobrestock', 'paginationInfoSobrestock', 'pageBtnsSobrestock',
-    items.length, page, p => { currentPages.sobrestock = p; renderTableSobrestock(); });
+  renderPagination('paginationSobrestock','paginationInfoSobrestock','pageBtnsSobrestock', items.length, page, p=>{currentPages.sobrestock=p;renderTableSobrestock();});
 }
 
 // ===== TABLE: Sin Movimiento =====
 function renderTableSinmov() {
-  const items = FILTERED.filter(r =>
-    num(r.STOCK) > 0 && num(r.VentasUltimos3Meses) <= 0
-  ).sort((a, b) => num(b.STOCK) - num(a.STOCK));
-
-  const page = currentPages.sinmov;
-  const start = (page - 1) * PAGE_SIZE;
-  const slice = items.slice(start, start + PAGE_SIZE);
-
+  const items = FILTERED.filter(r=>num(r.STOCK)>0&&num(r.VentasUltimos3Meses)<=0).sort((a,b)=>num(b.STOCK)-num(a.STOCK));
+  const page=currentPages.sinmov, start=(page-1)*PAGE_SIZE, slice=items.slice(start,start+PAGE_SIZE);
   const tbody = document.getElementById('bodySinmov');
-  if (items.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:16px">No se encontraron artículos</td></tr>`;
-  } else {
-    tbody.innerHTML = slice.map((r, i) => `<tr>
-      <td style="color:var(--text-muted)">${start + i + 1}</td>
-      <td><span style="font-family:'Space Mono';font-size:12px;color:var(--text-muted)">${r.COD_ARTICULO}</span></td>
-      <td title="${r.ARTICULO}">${r.ARTICULO.substring(0, 50)}</td>
-      <td style="color:var(--text-secondary)">${r.RUBRO}</td>
-      <td style="color:var(--text-secondary)">${(r.NOM_PROVEE || '').substring(0, 25)}</td>
+  if (!items.length) { tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;color:#7a96a6;padding:18px">No se encontraron artículos</td></tr>`; }
+  else {
+    tbody.innerHTML = slice.map((r,i) => `<tr>
+      <td style="color:#7a96a6;font-size:11px">${start+i+1}</td>
+      <td><span style="font-family:'Space Mono';font-size:11px;color:#7a96a6">${r.COD_ARTICULO}</span></td>
+      <td title="${r.ARTICULO}">${r.ARTICULO.substring(0,50)}</td>
+      <td style="color:#4a6375">${r.RUBRO}</td>
+      <td style="color:#4a6375">${(r.NOM_PROVEE||'').substring(0,25)}</td>
       <td class="num">${fmt(num(r.STOCK))}</td>
       <td class="num">${fmt(num(r.VentasUltimoAnio))}</td>
     </tr>`).join('');
   }
-
-  renderPagination('paginationSinmov', 'paginationInfoSinmov', 'pageBtnsSinmov',
-    items.length, page, p => { currentPages.sinmov = p; renderTableSinmov(); });
+  renderPagination('paginationSinmov','paginationInfoSinmov','pageBtnsSinmov', items.length, page, p=>{currentPages.sinmov=p;renderTableSinmov();});
 }
 
-// ===== TAB SWITCHING =====
+// ===== TABS =====
 function switchTab(id, btn) {
   document.querySelectorAll('#mainTabs button').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -1632,10 +1328,8 @@ function switchTab(id, btn) {
   document.getElementById('tab-' + id).classList.add('active');
 }
 
-
 // ===== INIT =====
 loadData();
 </script>
-
 </body>
 </html>
