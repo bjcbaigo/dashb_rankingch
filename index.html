@@ -1096,7 +1096,7 @@ function showLoading(show) {
       el = document.createElement('div');
       el.id = 'loadingOverlay';
       el.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;background:rgba(240,244,247,0.93);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;';
-      el.innerHTML = '<div class="spinner" style="width:42px;height:42px;border-width:3px;margin-bottom:14px"></div><div style="font-size:15px;color:#4a6375">Cargando datos desde Google Drive...</div><div style="font-size:12px;color:#7a96a6;margin-top:6px">Esto puede tomar unos segundos</div>';
+      el.innerHTML = '<div class="spinner" style="width:42px;height:42px;border-width:3px;margin-bottom:14px"></div><div style="font-size:15px;color:#4a6375">Cargando Ranking...</div><div id="loadingSource" style="font-size:12px;color:#7a96a6;margin-top:6px">Consultando fuente de datos</div>';
       document.body.appendChild(el);
     }
     el.style.display = 'flex';
@@ -1117,6 +1117,20 @@ function showError(msg) {
   el.style.display = 'flex';
 }
 
+async function fetchWithTimeout(url, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, {
+      redirect: 'follow',
+      cache: 'no-store',
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function loadData() {
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoMVjODiw-4bhxGwCKjNJwEhVNUzaYQ1xwVMHG7u2fIJTLrIrIJ2f7azVcgrivGgl8/exec';
   const SHEET_ID = '';
@@ -1130,19 +1144,24 @@ async function loadData() {
   let loadedSource = '';
 
   const sources = [];
-  if (APPS_SCRIPT_URL) sources.push({ url: APPS_SCRIPT_URL, name: 'Apps Script' });
-  if (SHEET_URL)       sources.push({ url: SHEET_URL,       name: 'Google Sheet' });
-  if (DRIVE_URL)       sources.push({ url: DRIVE_URL,       name: 'Google Drive' });
-  sources.push({ url: LOCAL_CSV,                            name: 'CSV Local' });
-  sources.push({ url: 'Reporte_Ranking_2026-02-07.csv',     name: 'CSV Local (fecha)' });
-  sources.push({ url: 'data.csv',                           name: 'CSV Local (data)' });
+  if (APPS_SCRIPT_URL) sources.push({ url: APPS_SCRIPT_URL, name: 'Apps Script', timeout: 10000 });
+  if (SHEET_URL)       sources.push({ url: SHEET_URL,       name: 'Google Sheet', timeout: 8000 });
+  if (DRIVE_URL)       sources.push({ url: DRIVE_URL,       name: 'Google Drive', timeout: 8000 });
+  sources.push({ url: LOCAL_CSV,                            name: 'CSV Local', timeout: 3000 });
+  sources.push({ url: 'Reporte_Ranking_2026-02-07.csv',     name: 'CSV Local (fecha)', timeout: 3000 });
+  sources.push({ url: 'data.csv',                           name: 'CSV Local (data)', timeout: 3000 });
 
   for (const src of sources) {
     if (loaded) break;
     try {
       console.log(`⏳ Intentando: ${src.name}`);
-      const resp = await fetch(src.url, { redirect: 'follow' });
-      if (!resp.ok) continue;
+      const loadingSource = document.getElementById('loadingSource');
+      if (loadingSource) loadingSource.textContent = `Consultando ${src.name}...`;
+      const resp = await fetchWithTimeout(src.url, src.timeout || 8000);
+      if (!resp.ok) {
+        console.warn(`⚠️ ${src.name}: HTTP ${resp.status}`);
+        continue;
+      }
       let text = await resp.text();
       text = text.replace(/^\uFEFF/, '').trim();
 
@@ -1175,16 +1194,19 @@ async function loadData() {
         DATA = parseCSV(text);
         if (DATA.length > 0) { loaded = true; loadedSource = src.name; console.log(`✅ CSV: ${DATA.length} registros`); break; }
       }
-    } catch(e) { console.warn(`❌ ${src.name}: ${e.message}`); }
+    } catch(e) {
+      const motivo = e && e.name === 'AbortError' ? 'timeout' : (e && e.message ? e.message : 'error desconocido');
+      console.warn(`❌ ${src.name}: ${motivo}`);
+    }
   }
 
   showLoading(false);
 
   if (!DATA.length) {
-    showError(`No se pudieron cargar los datos.<br><br>
+    showError(`No se pudieron cargar los datos desde ninguna fuente disponible.<br><br>
       <span style="font-size:13px;color:#4a6375">
-      1. Configurá APPS_SCRIPT_URL con tu Web App<br>
-      2. O colocá el CSV en la misma carpeta que este archivo
+      Verificá la conexión e intentá nuevamente.<br>
+      Si el problema persiste, revisar Apps Script / Google Drive.
       </span>`);
     return;
   }
