@@ -572,6 +572,134 @@ td.num{font-size:10px}
   .kpi-card:nth-child(-n+4) .kpi-value,.kpi-card:nth-child(n+5) .kpi-value{font-size:18px}
   .logo-mark{width:34px;height:34px;font-size:14px}
 }
+/* ===== DASHBOARD V2.1 · AJUSTE FINO AL MOCKUP ===== */
+.header-inner{height:68px}
+.main{padding-top:12px}
+.filters-bar{
+  display:grid;
+  grid-template-columns:150px 170px 190px 180px minmax(280px,1fr) auto;
+  align-items:end;
+  gap:10px;
+  padding:10px 14px;
+}
+.filter-group{gap:3px}
+.filter-group label{font-size:10px;font-weight:700;text-transform:none;color:#243f58}
+.filter-group select,.filter-group input{height:34px;padding:6px 10px}
+.filter-search{min-width:0}
+.filter-actions{margin-left:0}
+.btn-clear{height:34px;white-space:nowrap}
+
+.kpi-grid{gap:9px}
+.kpi-card{
+  display:grid;
+  grid-template-columns:52px 1fr;
+  grid-template-rows:auto auto auto;
+  column-gap:12px;
+  align-items:center;
+  min-height:92px!important;
+  padding:13px 15px;
+}
+.kpi-card .kpi-icon{
+  position:static;
+  grid-column:1;
+  grid-row:1/4;
+  width:44px;height:44px;
+  font-size:18px;
+  background:#eaf5fb;
+}
+.kpi-card .kpi-label{grid-column:2;grid-row:1;margin:0;font-size:12px;font-weight:700}
+.kpi-card .kpi-value{grid-column:2;grid-row:2;margin:2px 0 1px;font-size:25px!important;line-height:1;color:#0b3155}
+.kpi-card .kpi-sub{grid-column:2;grid-row:3;font-size:10px}
+.kpi-primary{border-top:2px solid #d6eaf5}
+.kpi-alert .kpi-icon{background:#fdeaea;color:#db3a3a}
+.kpi-alert .kpi-value{color:#b62f2f}
+
+.health-header{margin-bottom:10px}
+.health-heart{font-size:16px;color:#1686d9;line-height:1}
+.health-caption{font-size:10px;color:#60798d}
+.health-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+  margin-bottom:10px;
+}
+.health-item{
+  display:grid;
+  grid-template-columns:36px 1fr;
+  grid-template-rows:auto auto;
+  column-gap:9px;
+  align-items:center;
+  text-align:left;
+  padding:9px 11px;
+  min-height:58px;
+  position:relative;
+}
+.health-item::before{
+  content:'';
+  grid-column:1;
+  grid-row:1/3;
+  width:28px;height:28px;border-radius:50%;
+  display:block;
+}
+.health-ok::before{background:#27b66f}
+.health-warn::before{background:#f2a51a}
+.health-danger::before{background:#ef3e46}
+.health-info::before{background:#8498aa}
+.health-item .h-value{grid-column:2;grid-row:1;font-size:16px}
+.health-item .h-label{grid-column:2;grid-row:2;margin:0;font-size:10px}
+#healthBar{height:18px!important;border-radius:6px!important}
+
+.analytics-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.analytics-grid .card{padding:11px 12px}
+.analytics-grid .chart-container{height:215px!important}
+.analytics-grid .card-title{font-size:11px}
+.analytics-grid .card-actions{gap:2px}
+.analytics-grid .card-actions button{font-size:9px;padding:3px 6px}
+
+.tab-nav{
+  width:auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(135px,1fr));
+  gap:1px;
+}
+.tab-nav button{padding:8px 12px;font-size:11px}
+#tab-ranking .card-header{
+  padding:7px 0 9px;
+}
+#tab-ranking .card-title{font-size:11px;color:#6b8193}
+.table-wrap{
+  border-radius:7px;
+  max-height:430px;
+}
+thead th{
+  position:sticky;
+  top:0;
+  z-index:2;
+  font-size:9px;
+}
+tbody tr:nth-child(even){background:#fbfdff}
+tbody tr:hover{background:#f1f7fb}
+td{font-size:10.5px}
+.pagination{
+  border-top:1px solid #e4edf2;
+  padding-top:9px;
+}
+.pagination .page-btns button{min-width:30px;height:28px;padding:4px 8px}
+
+@media(max-width:1400px){
+  .filters-bar{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filter-actions{grid-column:3}
+}
+@media(max-width:1100px){
+  .analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:768px){
+  .filters-bar{display:flex;flex-direction:column;align-items:stretch}
+  .filter-actions{width:100%}
+  .kpi-card{grid-template-columns:42px 1fr;column-gap:8px}
+  .kpi-card .kpi-icon{width:36px;height:36px}
+  .analytics-grid{grid-template-columns:1fr}
+  .tab-nav{display:flex;overflow-x:auto;width:100%}
+}
 </style>
 </head>
 <body style="background:#f0f4f7;color:#1a2e3b;">
@@ -637,63 +765,64 @@ td.num{font-size:10px}
 
   <!-- KPIs -->
   <div class="kpi-grid animate-in" style="animation-delay:0.1s">
-    <div class="kpi-card">
+    <div class="kpi-card kpi-primary">
       <div class="kpi-icon">📦</div>
-      <div class="kpi-label">SKUs Analizados</div>
-      <div class="kpi-value" id="kpiSkus">--</div>
-      <div class="kpi-sub" id="kpiSkusSub">con stock</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">📊</div>
-      <div class="kpi-label">Stock Total (uds)</div>
+      <div class="kpi-label">Stock Total</div>
       <div class="kpi-value" id="kpiStock">--</div>
       <div class="kpi-sub" id="kpiStockSub">unidades en inventario</div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">🛒</div>
+    <div class="kpi-card kpi-primary">
+      <div class="kpi-icon">📊</div>
       <div class="kpi-label">Ventas Último Mes</div>
       <div class="kpi-value" id="kpiVtaMes">--</div>
       <div class="kpi-sub" id="kpiVtaMesSub">unidades vendidas</div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">📈</div>
-      <div class="kpi-label">Ventas Últimos 3M</div>
-      <div class="kpi-value" id="kpiVta3m">--</div>
-      <div class="kpi-sub" id="kpiVta3mSub">unidades vendidas</div>
-    </div>
-    <div class="kpi-card">
+    <div class="kpi-card kpi-primary kpi-alert">
       <div class="kpi-icon">⚠️</div>
-      <div class="kpi-label">Quiebres de Stock</div>
+      <div class="kpi-label">Quiebres</div>
       <div class="kpi-value" id="kpiQuiebres">--</div>
-      <div class="kpi-sub">sin stock + con venta</div>
+      <div class="kpi-sub">SKU sin stock + con venta</div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">📅</div>
+    <div class="kpi-card kpi-primary">
+      <div class="kpi-icon">◔</div>
       <div class="kpi-label">Cobertura Global</div>
       <div class="kpi-value" id="kpiCobertura">--</div>
-      <div class="kpi-sub">meses de stock</div>
+      <div class="kpi-sub">meses de inventario</div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">🏢</div>
-      <div class="kpi-label">Stock CD (uds)</div>
+    <div class="kpi-card kpi-secondary">
+      <div class="kpi-icon">🏷️</div>
+      <div class="kpi-label">SKU Analizados</div>
+      <div class="kpi-value" id="kpiSkus">--</div>
+      <div class="kpi-sub" id="kpiSkusSub">con stock</div>
+    </div>
+    <div class="kpi-card kpi-secondary">
+      <div class="kpi-icon">▣</div>
+      <div class="kpi-label">Stock CD</div>
       <div class="kpi-value" id="kpiStockCD">--</div>
       <div class="kpi-sub" id="kpiStockCDSub">unidades en CD</div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-icon">🏭</div>
-      <div class="kpi-label">Stock CA (uds)</div>
+    <div class="kpi-card kpi-secondary">
+      <div class="kpi-icon">▦</div>
+      <div class="kpi-label">Stock CA</div>
       <div class="kpi-value" id="kpiStockCA">--</div>
       <div class="kpi-sub" id="kpiStockCASub">unidades en CA</div>
+    </div>
+    <div class="kpi-card kpi-secondary">
+      <div class="kpi-icon">↗</div>
+      <div class="kpi-label">Ventas 3 Meses</div>
+      <div class="kpi-value" id="kpiVta3m">--</div>
+      <div class="kpi-sub" id="kpiVta3mSub">unidades vendidas</div>
     </div>
   </div>
 
   <!-- HEALTH OF INVENTORY -->
   <div class="card animate-in" style="animation-delay:0.15s; margin-bottom:20px">
-    <div class="card-header">
+    <div class="card-header health-header">
       <div class="card-title">
-        <div class="dot-indicator" style="background:#2596be"></div>
+        <div class="health-heart">♥</div>
         Salud del Inventario
       </div>
+      <div class="health-caption">Distribución de SKU por estado</div>
     </div>
     <div class="health-grid" id="healthGrid">
       <div class="health-item health-ok">
@@ -766,7 +895,7 @@ td.num{font-size:10px}
       <div class="card-header">
         <div class="card-title">
           <div class="dot-indicator" style="background:#c47d0e"></div>
-          Cobertura de Stock por Rubro (meses)
+          Cobertura por Rubro (meses)
         </div>
       </div>
       <div class="chart-container" style="height:340px">
@@ -784,19 +913,13 @@ td.num{font-size:10px}
         <button onclick="switchTab('sobrestock',this)">🟡 Sobrestock</button>
         <button onclick="switchTab('sinmov',this)">⚪ Sin Movimiento</button>
       </div>
-      <button class="btn-excel" onclick="exportarExcel()" title="Descargar ranking actual en Excel">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-          <line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/>
-        </svg>
-        Descargar Excel
-      </button>
+
     </div>
 
     <!-- RANKING TABLE -->
     <div class="tab-content active" id="tab-ranking">
       <div class="card-header" style="margin-bottom:0">
-        <div class="card-title">Top artículos por venta mensual</div>
+        <div class="card-title">Ranking de ventas</div>
         <div class="card-actions">
           <button class="active" onclick="setRankPeriod('mes',this)">Mes</button>
           <button onclick="setRankPeriod('3m',this)">3 Meses</button>
