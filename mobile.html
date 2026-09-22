@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b4f83">
+<title>CHEMES · Ranking Mobile</title>
+<style>
+:root{
+  --blue:#0b4f83;--blue2:#0879d8;--bg:#f3f7fa;--card:#fff;--line:#dce7ee;
+  --text:#173b5b;--muted:#6c8192;--green:#1f9d62;--amber:#e6a817;--red:#d9433d;--gray:#91a3b1;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+body{padding-bottom:28px}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(105deg,#0b4f83,#0879d8);color:#fff;padding:12px 14px;box-shadow:0 5px 16px rgba(11,79,131,.18)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:38px;height:38px;border:1px solid rgba(255,255,255,.5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;background:rgba(255,255,255,.12);flex:0 0 auto}
+.brand-copy{min-width:0}
+.brand-title{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:10px;opacity:.8;margin-top:2px}
+.refresh{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:9px 11px;font-weight:700}
+.meta{font-size:10px;opacity:.8;margin-top:8px;display:flex;justify-content:space-between;gap:8px}
+main{padding:10px}
+.status{background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:12px;color:var(--muted);margin-bottom:10px}
+.status strong{color:var(--text)}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:10px}
+.filters .wide{grid-column:1/-1}
+label{display:block;font-size:10px;font-weight:700;margin-bottom:4px}
+select,input{width:100%;height:38px;border:1px solid #cfdee7;border-radius:8px;background:#fff;padding:0 10px;font-size:13px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;min-height:84px}
+.kpi .label{font-size:10px;color:var(--muted);font-weight:700}
+.kpi .value{font-size:23px;font-weight:800;margin:5px 0 2px;color:#0c3558}
+.kpi .note{font-size:9px;color:var(--muted)}
+.health{background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:10px}
+.section-title{font-size:12px;font-weight:800;margin-bottom:8px}
+.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.h{border:1px solid var(--line);border-radius:8px;padding:9px;display:flex;align-items:center;gap:8px}
+.dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+.h strong{display:block;font-size:16px}
+.h span{font-size:9px;color:var(--muted)}
+.tabs{display:flex;gap:6px;overflow:auto;padding-bottom:4px;margin-bottom:8px}
+.tab{white-space:nowrap;border:1px solid #cddce5;background:#fff;color:#37536b;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:700}
+.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px}
+.item-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.code{font-family:monospace;color:var(--blue2);font-size:11px;font-weight:700}
+.name{font-size:13px;font-weight:700;line-height:1.25;margin-top:3px}
+.badge{font-size:9px;font-weight:800;border-radius:999px;padding:4px 7px;white-space:nowrap}
+.badge.red{background:#fde9e8;color:#b73530}.badge.amber{background:#fff4d6;color:#9d6800}.badge.green{background:#e5f6ee;color:#177648}.badge.gray{background:#eef2f5;color:#687b8a}.badge.blue{background:#e6f2fb;color:#12679d}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:9px}
+.m{background:#f7fafc;border-radius:6px;padding:6px}
+.m span{display:block;font-size:8px;color:var(--muted)}
+.m strong{font-size:11px}
+.more{margin-top:7px;font-size:10px;color:var(--muted)}
+.empty{background:#fff;border:1px solid var(--line);border-radius:9px;padding:24px 12px;text-align:center;color:var(--muted)}
+.loader{position:fixed;inset:0;background:rgba(243,247,250,.97);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.spinner{width:38px;height:38px;border:3px solid #d9e7ef;border-top-color:var(--blue2);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-title{font-weight:800}.loader-sub{font-size:12px;color:var(--muted);margin-top:6px}
+.error{color:#a93631}
+@media(min-width:700px){main{max-width:760px;margin:auto}.kpis{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="head">
+    <div class="brand">
+      <div class="logo">CH</div>
+      <div class="brand-copy">
+        <div class="brand-title">CHEMES · Ranking</div>
+        <div class="brand-sub">Versión móvil operativa</div>
+      </div>
+    </div>
+    <button class="refresh" onclick="loadData()">↻</button>
+  </div>
+  <div class="meta"><span id="source">Fuente: —</span><span id="updated">Actualizado: —</span></div>
+</header>
+
+<main>
+  <div class="status" id="status">Preparando datos…</div>
+
+  <section class="filters">
+    <div><label>Rubro</label><select id="rubro"><option value="">Todos</option></select></div>
+    <div><label>Estado</label><select id="estado">
+      <option value="">Todos</option><option value="quiebre">Quiebres</option><option value="critico">Crítico</option>
+      <option value="bajo">Bajo</option><option value="saludable">Saludable</option><option value="sobre">Sobrestock</option>
+    </select></div>
+    <div class="wide"><label>Buscar artículo / SKU</label><input id="search" placeholder="Código o descripción"></div>
+  </section>
+
+  <section class="kpis">
+    <article class="kpi"><div class="label">Stock total</div><div class="value" id="kStock">—</div><div class="note">stock físico</div></article>
+    <article class="kpi"><div class="label">Venta último mes</div><div class="value" id="kVenta">—</div><div class="note">unidades</div></article>
+    <article class="kpi"><div class="label">Quiebres</div><div class="value" id="kQuiebre">—</div><div class="note">sin disponible ni reposición</div></article>
+    <article class="kpi"><div class="label">Cobertura</div><div class="value" id="kCob">—</div><div class="note">meses sobre disponible</div></article>
+  </section>
+
+  <section class="health">
+    <div class="section-title">Salud del inventario</div>
+    <div class="health-grid">
+      <div class="h"><i class="dot" style="background:var(--green)"></i><div><strong id="hOk">—</strong><span>Saludable</span></div></div>
+      <div class="h"><i class="dot" style="background:var(--amber)"></i><div><strong id="hSobre">—</strong><span>Sobrestock</span></div></div>
+      <div class="h"><i class="dot" style="background:var(--red)"></i><div><strong id="hQ">—</strong><span>Quiebre</span></div></div>
+      <div class="h"><i class="dot" style="background:var(--gray)"></i><div><strong id="hSin">—</strong><span>Sin movimiento</span></div></div>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <button class="tab active" data-mode="ventas">Ranking ventas</button>
+    <button class="tab" data-mode="quiebres">Quiebres</button>
+    <button class="tab" data-mode="sobre">Sobrestock</button>
+    <button class="tab" data-mode="sinmov">Sin movimiento</button>
+  </div>
+
+  <section class="list" id="list"></section>
+</main>
+
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <div class="loader-title">Cargando Ranking…</div>
+  <div class="loader-sub" id="loaderSub">Conectando con la fuente de datos</div>
+</div>
+
+<script>
+var DATA=[], FILTERED=[], MODE='ventas';
+var APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbxoMVjODiw-4bhxGwCKjNJwEhVNUzaYQ1xwVMHG7u2fIJTLrIrIJ2f7azVcgrivGgl8/exec';
+
+function num(v){
+  if(v===null||v===undefined||v==='')return 0;
+  if(typeof v==='number')return isFinite(v)?v:0;
+  var s=String(v).trim().replace(/\./g,'').replace(',','.');
+  var n=parseFloat(s);return isNaN(n)?0:n;
+}
+function fmt(n){return Number(n||0).toLocaleString('es-AR',{maximumFractionDigits:0})}
+function stockDisponible(r){return Math.max(num(r.STOCK)-num(r.COMPROMETIDA),0)}
+function prom3(r){return num(r.VentasUltimos3Meses)/3}
+function cobMes(r){var p=prom3(r);return p>0?stockDisponible(r)/p:null}
+function cobDias(r){var m=cobMes(r);return m===null?null:m*30}
+function quiebre(r){return stockDisponible(r)<=0&&num(r.VentasUltimoMes)>0&&num(r.A_RECEPCIONAR)<=0}
+
+function status(r){
+  var disp=stockDisponible(r), vm=num(r.VentasUltimoMes), v3=num(r.VentasUltimos3Meses), ar=num(r.A_RECEPCIONAR), d=cobDias(r), m=cobMes(r);
+  if(disp<=0&&vm>0&&ar<=0)return {k:'quiebre',t:'Quiebre',c:'red'};
+  if(disp<=0&&vm>0&&ar>0)return {k:'reposicion',t:'Reposición',c:'blue'};
+  if(num(r.STOCK)>0&&v3<=0)return {k:'sinmov',t:'Sin movimiento',c:'gray'};
+  if(d!==null&&disp>0&&d<=7)return {k:'critico',t:'Crítico',c:'red'};
+  if(d!==null&&disp>0&&d<=15)return {k:'bajo',t:'Bajo',c:'amber'};
+  if(m!==null&&disp>0&&m>6)return {k:'sobre',t:'Sobrestock',c:'amber'};
+  if(d!==null&&disp>0&&d>15)return {k:'saludable',t:'Saludable',c:'green'};
+  return {k:'inactivo',t:'Inactivo',c:'gray'};
+}
+function normalize(json){
+  if(!Array.isArray(json))return [];
+  if(!json.length)return [];
+  var k=Object.keys(json[0]||{});
+  if(k.indexOf('r')>=0&&k.indexOf('RUBRO')<0){
+    return json.map(function(r){return {
+      RUBRO:r.r,SUBRUBRO:r.sr,COD_ARTICULO:r.cod,ARTICULO:r.art,DESCRIPCION_ADICIONAL:r.desc,
+      STOCK:r.stk,A_RECEPCIONAR:r.arec,COMPROMETIDA:r.comp,VentasUltimoMes:r.vm,
+      VentasUltimos3Meses:r.v3,VentasUltimoAnio:r.va,STOCK_CD:r.scd,STOCK_CA:r.sca,
+      STOCK_CN:r.scn,L1:r.l1,NOM_PROVEE:r.prov,SKU_PROVEEDOR:r.sku_p,COD_BARRA:r.cb
+    }});
+  }
+  return json;
+}
+function setLoading(show,msg){
+  var l=document.getElementById('loader');if(msg)document.getElementById('loaderSub').textContent=msg;
+  l.style.display=show?'flex':'none';
+}
+function fail(msg){
+  document.getElementById('loader').innerHTML='<div class="loader-title error">No se pudo cargar el Ranking</div><div class="loader-sub">'+msg+'</div><button class="refresh" style="margin-top:14px;background:var(--blue2)" onclick="location.reload()">Reintentar</button>';
+}
+function loadData(){
+  setLoading(true,'Conectando con Apps Script…');
+  fetch(APPS_SCRIPT_URL,{redirect:'follow'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);setLoading(true,'Recibiendo datos…');return r.text()})
+    .then(function(text){
+      text=text.replace(/^\uFEFF/,'').trim();
+      var json=JSON.parse(text);
+      if(json&&json.error)throw new Error(json.error);
+      DATA=normalize(json);
+      if(!DATA.length)throw new Error('La fuente respondió sin registros');
+      document.getElementById('source').textContent='Fuente: Apps Script';
+      document.getElementById('updated').textContent='Actualizado: '+new Date().toLocaleString('es-AR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});
+      document.getElementById('status').innerHTML='<strong>'+fmt(DATA.length)+'</strong> artículos recibidos correctamente';
+      populateRubros();apply();
+      setLoading(false);
+    })
+    .catch(function(e){fail((e&&e.message)?e.message:'Error de conexión')});
+}
+function populateRubros(){
+  var vals={};DATA.forEach(function(r){if(r.RUBRO)vals[r.RUBRO]=1});
+  var arr=Object.keys(vals).sort();
+  document.getElementById('rubro').innerHTML='<option value="">Todos</option>'+arr.map(function(x){return '<option>'+x+'</option>'}).join('');
+}
+function apply(){
+  var rub=document.getElementById('rubro').value, est=document.getElementById('estado').value, q=document.getElementById('search').value.toLowerCase();
+  FILTERED=DATA.filter(function(r){
+    if(rub&&r.RUBRO!==rub)return false;
+    var st=status(r);if(est&&st.k!==est)return false;
+    if(q){
+      var hay=((r.COD_ARTICULO||'')+' '+(r.ARTICULO||'')+' '+(r.NOM_PROVEE||'')).toLowerCase();
+      if(hay.indexOf(q)<0)return false;
+    }
+    return true;
+  });
+  renderKpis();renderList();
+}
+function renderKpis(){
+  var st=0,vm=0,q=0,numc=0,denc=0,ok=0,sobre=0,sin=0;
+  FILTERED.forEach(function(r){
+    st+=num(r.STOCK);vm+=num(r.VentasUltimoMes);if(quiebre(r))q++;
+    var d=stockDisponible(r),p=prom3(r),s=status(r);
+    if(d>0&&p>0){numc+=d;denc+=p}
+    if(s.k==='saludable'||s.k==='critico'||s.k==='bajo')ok++;
+    else if(s.k==='sobre')sobre++;
+    else if(s.k==='sinmov')sin++;
+  });
+  document.getElementById('kStock').textContent=fmt(st);
+  document.getElementById('kVenta').textContent=fmt(vm);
+  document.getElementById('kQuiebre').textContent=fmt(q);
+  document.getElementById('kCob').textContent=denc>0?(numc/denc).toFixed(1):'—';
+  document.getElementById('hOk').textContent=fmt(ok);
+  document.getElementById('hSobre').textContent=fmt(sobre);
+  document.getElementById('hQ').textContent=fmt(q);
+  document.getElementById('hSin').textContent=fmt(sin);
+}
+function filteredForMode(){
+  var a=FILTERED.slice();
+  if(MODE==='quiebres')a=a.filter(quiebre);
+  else if(MODE==='sobre')a=a.filter(function(r){return status(r).k==='sobre'});
+  else if(MODE==='sinmov')a=a.filter(function(r){return status(r).k==='sinmov'});
+  a.sort(function(a,b){return num(b.VentasUltimoMes)-num(a.VentasUltimoMes)});
+  return a.slice(0,100);
+}
+function renderList(){
+  var a=filteredForMode(), host=document.getElementById('list');
+  if(!a.length){host.innerHTML='<div class="empty">No hay artículos para los filtros seleccionados.</div>';return}
+  host.innerHTML=a.map(function(r){
+    var s=status(r),m=cobMes(r),d=stockDisponible(r);
+    return '<article class="item"><div class="item-head"><div><div class="code">'+(r.COD_ARTICULO||'')+'</div><div class="name">'+(r.ARTICULO||'')+'</div></div><span class="badge '+s.c+'">'+s.t+'</span></div>'+
+    '<div class="metrics"><div class="m"><span>Stock</span><strong>'+fmt(num(r.STOCK))+'</strong></div><div class="m"><span>Disponible</span><strong>'+fmt(d)+'</strong></div><div class="m"><span>Comprom.</span><strong>'+fmt(num(r.COMPROMETIDA))+'</strong></div><div class="m"><span>A recibir</span><strong>'+fmt(num(r.A_RECEPCIONAR))+'</strong></div></div>'+
+    '<div class="metrics"><div class="m"><span>Vta mes</span><strong>'+fmt(num(r.VentasUltimoMes))+'</strong></div><div class="m"><span>Vta 3M</span><strong>'+fmt(num(r.VentasUltimos3Meses))+'</strong></div><div class="m"><span>Stock CD</span><strong>'+fmt(num(r.STOCK_CD))+'</strong></div><div class="m"><span>Cobertura</span><strong>'+(m===null?'—':m.toFixed(1)+'m')+'</strong></div></div>'+
+    '<div class="more">'+(r.RUBRO||'')+' · '+(r.NOM_PROVEE||'')+'</div></article>'
+  }).join('');
+}
+document.getElementById('rubro').addEventListener('change',apply);
+document.getElementById('estado').addEventListener('change',apply);
+document.getElementById('search').addEventListener('input',function(){clearTimeout(window._s);window._s=setTimeout(apply,250)});
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+  b.classList.add('active');MODE=b.getAttribute('data-mode');renderList();
+})});
+loadData();
+</script>
+</body>
+</html>
