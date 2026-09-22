@@ -446,6 +446,132 @@ td.num {
 .btn-excel:hover { background: #155f3d; transform: translateY(-1px); box-shadow: 0 3px 8px rgba(26,122,78,0.25); }
 .btn-excel:active { transform: translateY(0); }
 .btn-excel svg { flex-shrink: 0; }
+/* ===== DASHBOARD V2 · PRESENTACIÓN EJECUTIVA ===== */
+:root{
+  --shell:#eef4f8;
+  --navy:#0a3d68;
+  --blue:#0879d8;
+  --blue-2:#2496d8;
+  --cyan:#31b7c7;
+  --green:#1fa968;
+  --amber:#f0a51a;
+  --red:#e94343;
+  --slate:#7c8fa1;
+  --shadow-lg:0 8px 24px rgba(20,62,91,.09);
+}
+html,body{background:linear-gradient(180deg,#edf4f8 0,#f7fafc 100%)!important}
+body{font-family:'DM Sans',sans-serif}
+.header{
+  position:sticky;top:0;z-index:120;
+  background:linear-gradient(105deg,#0c4f86 0%,#0879d8 58%,#075286 100%);
+  border:0;padding:0 30px;box-shadow:0 6px 18px rgba(10,61,104,.18)
+}
+.header-inner{max-width:1680px;height:70px}
+.brand-block,.brand-copy,.source-meta{display:flex}
+.brand-copy{flex-direction:column;gap:3px}
+.brand-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:.1px}
+.brand-title span:last-child{font-weight:700}
+.brand-divider{opacity:.65;padding:0 6px}
+.brand-subtitle{font-size:11px;color:rgba(255,255,255,.78);font-weight:500}
+.logo-mark{
+  width:42px;height:42px;border-radius:10px;border:1px solid rgba(255,255,255,.55);
+  background:rgba(255,255,255,.12);color:#fff;font-size:18px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)
+}
+.header-meta{gap:10px}
+.source-meta{flex-direction:column;align-items:flex-end;gap:2px;font-size:10px;line-height:1.3;color:rgba(255,255,255,.86);margin-right:6px}
+.btn-reload,.btn-header-excel{
+  border-radius:8px;padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s
+}
+.btn-reload{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:#fff}
+.btn-reload:hover{background:rgba(255,255,255,.2)}
+.btn-header-excel{background:#15a85f;border:1px solid #159454;color:#fff}
+.btn-header-excel:hover{background:#11884e;transform:translateY(-1px)}
+
+.main{max-width:1680px;padding:14px 30px 28px}
+.filters-bar{
+  gap:14px;margin-bottom:12px;padding:11px 14px;background:rgba(255,255,255,.96);
+  border:1px solid #d9e6ee;border-radius:9px;box-shadow:var(--shadow-lg)
+}
+.filter-group label{font-size:9px;color:#3f5870;letter-spacing:.35px}
+.filter-group select,.filter-group input{
+  background:#fff;border:1px solid #d5e2ea;border-radius:7px;padding:8px 10px;min-width:150px;
+  box-shadow:0 1px 2px rgba(20,62,91,.03)
+}
+.filter-search{min-width:250px}
+.filter-actions{display:flex;align-items:flex-end;margin-left:auto}
+.btn-clear{height:35px;padding:0 13px;border:1px solid #d6e3eb;background:#edf4f8;color:#31506a;border-radius:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer}
+.btn-clear:hover{background:#e2edf4}
+
+.kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.kpi-card{
+  min-height:92px;border:1px solid #dce7ee;border-radius:9px;padding:15px 16px;background:#fff;
+  box-shadow:var(--shadow-lg);transition:.18s
+}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,62,91,.12)}
+.kpi-card::before{height:0}
+.kpi-card:nth-child(-n+4){min-height:102px}
+.kpi-card:nth-child(n+5){min-height:84px}
+.kpi-card:nth-child(-n+4) .kpi-value{font-size:28px;color:#0b3155}
+.kpi-card:nth-child(n+5) .kpi-value{font-size:23px;color:#0b3155}
+.kpi-label{font-size:11px;color:#29465f;letter-spacing:0;text-transform:none;margin-bottom:7px}
+.kpi-sub{font-size:10px;color:#6e8293}
+.kpi-icon{
+  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e8f4fb;color:#0879d8;opacity:1;font-size:17px;top:14px;right:14px
+}
+.kpi-card:nth-child(5) .kpi-icon{background:#fdeaea}
+.kpi-card:nth-child(6) .kpi-icon{background:#e8f4fb}
+.kpi-card:nth-child(7) .kpi-icon,.kpi-card:nth-child(8) .kpi-icon{background:#eef7fb}
+
+.card{border:1px solid #dce7ee;border-radius:9px;box-shadow:var(--shadow-lg);padding:14px}
+.card-title{font-size:12px;text-transform:none;letter-spacing:0;color:#173b5b}
+.health-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.health-item{background:#fbfdff;border:1px solid #dce7ee;padding:11px;border-radius:8px}
+.health-item .h-value{font-size:17px}
+.health-item .h-label{font-size:10px}
+#healthBar{background:#edf2f5}
+
+.analytics-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.analytics-grid .card{min-width:0}
+.analytics-grid .chart-container{height:250px!important}
+.analytics-grid .card-header{margin-bottom:8px}
+.analytics-grid .card-actions button{font-size:9px;padding:3px 7px}
+
+.tab-nav{border-radius:8px;padding:2px;background:#f2f6f9}
+.tab-nav button{font-size:11px;padding:8px 14px}
+.table-wrap{border:1px solid #e2ebf0;border-radius:7px;overflow:auto}
+thead th{background:#f4f8fb;color:#38536b;font-size:9px;padding:8px 9px}
+td{padding:8px 9px;font-size:11px}
+td.num{font-size:10px}
+.badge{border-radius:14px;padding:3px 9px;font-size:10px}
+.pagination{margin-top:10px}
+
+@media(max-width:1280px){
+  .analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .header-inner{height:auto;padding:9px 0;gap:8px;align-items:flex-start}
+  .header-meta{flex-wrap:wrap;justify-content:flex-end}
+  .source-meta{display:none}
+}
+@media(max-width:768px){
+  .main{padding:10px}
+  .header{padding:0 12px}
+  .analytics-grid{grid-template-columns:1fr}
+  .health-grid{grid-template-columns:repeat(2,1fr)}
+  .filter-actions{width:100%;margin-left:0}
+  .btn-clear{width:100%}
+  .brand-title{font-size:15px}
+  .brand-subtitle{font-size:10px}
+  .btn-header-excel{display:none}
+}
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .kpi-card{min-height:82px!important;padding:11px}
+  .kpi-card:nth-child(-n+4) .kpi-value,.kpi-card:nth-child(n+5) .kpi-value{font-size:18px}
+  .logo-mark{width:34px;height:34px;font-size:14px}
+}
 </style>
 </head>
 <body style="background:#f0f4f7;color:#1a2e3b;">
@@ -453,14 +579,22 @@ td.num {
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="logo">
-      <div class="logo-mark">CH</div>
-      <span>CHEMES <span>· Ranking de Productos</span></span>
+    <div class="brand-block">
+      <div class="logo">
+        <div class="logo-mark">CH</div>
+        <div class="brand-copy">
+          <div class="brand-title">CHEMES <span class="brand-divider">|</span> <span>Ranking de Productos</span></div>
+          <div class="brand-subtitle">Análisis comercial y de stock</div>
+        </div>
+      </div>
     </div>
     <div class="header-meta">
-      <div class="dot"></div>
-      <span id="headerDate">Actualizado: --</span>
-      <button class="btn-reload" onclick="loadData()">⟳ Recargar</button>
+      <div class="source-meta">
+        <span id="headerSource">Fuente: --</span>
+        <span id="headerDate">Actualizado: --</span>
+      </div>
+      <button class="btn-reload" onclick="loadData()">↻ Recargar</button>
+      <button class="btn-header-excel" onclick="exportarExcel()">⇩ Exportar Excel</button>
     </div>
   </div>
 </header>
@@ -494,7 +628,10 @@ td.num {
     </div>
     <div class="filter-group filter-search">
       <label>Buscar artículo / SKU</label>
-      <input type="text" id="filterSearch" placeholder="Buscar por código, nombre o proveedor..." aria-label="Buscar">
+      <input type="text" id="filterSearch" placeholder="Buscar artículo / SKU..." aria-label="Buscar">
+    </div>
+    <div class="filter-actions">
+      <button class="btn-clear" onclick="clearFilters()" title="Limpiar todos los filtros">⌁ Limpiar filtros</button>
     </div>
   </div>
 
@@ -502,7 +639,7 @@ td.num {
   <div class="kpi-grid animate-in" style="animation-delay:0.1s">
     <div class="kpi-card">
       <div class="kpi-icon">📦</div>
-      <div class="kpi-label">SKUs Activos</div>
+      <div class="kpi-label">SKUs Analizados</div>
       <div class="kpi-value" id="kpiSkus">--</div>
       <div class="kpi-sub" id="kpiSkusSub">con stock</div>
     </div>
@@ -532,7 +669,7 @@ td.num {
     </div>
     <div class="kpi-card">
       <div class="kpi-icon">📅</div>
-      <div class="kpi-label">Cobertura Promedio</div>
+      <div class="kpi-label">Cobertura Global</div>
       <div class="kpi-value" id="kpiCobertura">--</div>
       <div class="kpi-sub">meses de stock</div>
     </div>
@@ -581,8 +718,8 @@ td.num {
     </div>
   </div>
 
-  <!-- CHARTS ROW -->
-  <div class="grid-2 animate-in" style="animation-delay:0.2s">
+  <!-- ANALÍTICA PRINCIPAL -->
+  <div class="analytics-grid animate-in" style="animation-delay:0.2s">
     <div class="card">
       <div class="card-header">
         <div class="card-title">
@@ -610,9 +747,6 @@ td.num {
         <canvas id="chartStockRubro"></canvas>
       </div>
     </div>
-  </div>
-
-  <div class="grid-2 animate-in" style="animation-delay:0.25s">
     <div class="card">
       <div class="card-header">
         <div class="card-title">
@@ -840,6 +974,7 @@ async function loadData() {
 
   showLoading(true);
   let loaded = false;
+  let loadedSource = '';
 
   const sources = [];
   if (APPS_SCRIPT_URL) sources.push({ url: APPS_SCRIPT_URL, name: 'Apps Script' });
@@ -876,6 +1011,7 @@ async function loadData() {
                 }));
               } else { DATA = json; }
               loaded = true;
+              loadedSource = src.name;
               console.log(`✅ JSON: ${DATA.length} registros`);
               break;
             }
@@ -884,7 +1020,7 @@ async function loadData() {
       }
       if (!loaded && text.includes(';') && (text.includes('RUBRO') || text.includes('COD_ARTICULO'))) {
         DATA = parseCSV(text);
-        if (DATA.length > 0) { loaded = true; console.log(`✅ CSV: ${DATA.length} registros`); break; }
+        if (DATA.length > 0) { loaded = true; loadedSource = src.name; console.log(`✅ CSV: ${DATA.length} registros`); break; }
       }
     } catch(e) { console.warn(`❌ ${src.name}: ${e.message}`); }
   }
@@ -900,7 +1036,10 @@ async function loadData() {
     return;
   }
 
-  document.getElementById('headerDate').textContent = 'Actualizado: ' + new Date().toLocaleDateString('es-AR');
+  const now = new Date();
+  document.getElementById('headerDate').textContent = 'Actualizado: ' + now.toLocaleDateString('es-AR') + ' ' + now.toLocaleTimeString('es-AR', {hour:'2-digit', minute:'2-digit'});
+  const sourceEl = document.getElementById('headerSource');
+  if (sourceEl) sourceEl.textContent = 'Fuente: ' + (loadedSource || 'Datos del ranking');
   populateFilters();
   applyFilters();
 }
@@ -953,6 +1092,16 @@ function applyFilters() {
   });
   currentPages = { ranking: 1, sobrestock: 1, sinmov: 1 };
   renderAll();
+}
+
+function clearFilters() {
+  document.getElementById('filterRubro').value = '';
+  document.getElementById('filterSubrubro').innerHTML = '<option value="">Todos</option>';
+  document.getElementById('filterProveedor').value = '';
+  document.getElementById('filterStock').value = '';
+  document.getElementById('filterSearch').value = '';
+  sortConfig = { key: null, asc: false };
+  applyFilters();
 }
 
 document.getElementById('filterRubro').addEventListener('change',    () => { updateSubrubros(); applyFilters(); });
